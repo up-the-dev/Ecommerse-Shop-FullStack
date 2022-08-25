@@ -4,7 +4,10 @@
     margin: auto;
     display: block;
 }
-
+.centered{
+    margin-left: 100px;
+    text-align: center;
+  }
 .product-item {
     width: 20rem;
     max-width: 95%;
