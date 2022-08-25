@@ -1,3 +1,27 @@
+const mongoose=require('mongoose')
+
+const productSchema=new mongoose.Schema({
+  title:{
+    type:String,
+    required:true
+  },
+  imageUrl:{
+    type:String,
+    required:true
+  },
+  description:{
+    type:String
+  },
+  price:{
+    type:Number,
+    required:true
+  }
+})
+
+const Product=mongoose.model('Product',productSchema)
+module.exports=Product
+
+/*
 const fs = require('fs');
 const path = require('path');
 
@@ -17,7 +41,8 @@ const getProductsFromFile = cb => {
   });
 };
 
-module.exports = class Product {
+
+class Product {
   constructor(title, imageUrl, description, price) {
     this.title = title;
     this.imageUrl = imageUrl;
@@ -38,3 +63,4 @@ module.exports = class Product {
     getProductsFromFile(cb);
   }
 };
+*/
