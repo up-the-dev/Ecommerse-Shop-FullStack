@@ -1,3 +1,4 @@
+const CartProduct = require('../models/cartProduct');
 const Product = require('../models/product');
 
 const shopController = {
@@ -31,6 +32,25 @@ const shopController = {
         path: '/cart',
         pageTitle: 'Your Cart'
       });
+    }catch(err){
+      return next(err)
+    }
+  },
+  postCart:async(req,res,next)=>{
+    try{
+      const productId=req.body.productId
+      const cartproduct = new CartProduct({
+        productId:productId
+      })
+      const result=await cartproduct.save()
+      const cartProducts=await 
+      console.log(cartProducts)
+      res.render('shop/cart',{
+        path:'/cart',
+        pageTitle:'cart',
+        cartProducts
+
+      })
     }catch(err){
       return next(err)
     }
