@@ -3,7 +3,7 @@ const User = require('../../models/user')
 const CustomErrorHandler = require('../../services/CustomErrorHandler')
 const bcrypt = require('bcrypt')
 const JwtService = require('../../services/jwt')
-const {REFRESH_SECRET}=require('../../config')
+const { REFRESH_SECRET } = require('../../config')
 const { RefreshToken } = require('../../models/refreshToken')
 const register = {
     registration: async (req, res, next) => {
@@ -19,10 +19,8 @@ const register = {
         if (error) {
             return next(error)
         }
-
         let access_token
         let refresh_token
-
         try {
             //checking if user already registered
             const exist = await User.findOne({ email: req.body.email })
@@ -43,17 +41,16 @@ const register = {
             console.log(result)
             //issue jwt access token and refresh token
             access_token = JwtService.sign({ _id: result._id, role: result.role })
-            refresh_token = JwtService.sign({ _id: result._id, role: user.role },REFRESH_SECRET,'1y')
+            refresh_token = JwtService.sign({ _id: result._id, role: user.role }, REFRESH_SECRET, '1y')
             //save refresh token in db
-            const refreshtoken=new RefreshToken({
-                token:refresh_token
+            const refreshtoken = new RefreshToken({
+                token: refresh_token
             })
             await refreshtoken.save()
-
         } catch (err) {
             return next(err)
         }
-        res.json({ access_token,refresh_token })
+        res.json({ access_token, refresh_token })
     }
 }
 module.exports = register
