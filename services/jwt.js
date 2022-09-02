@@ -4,7 +4,7 @@ class JwtService{
     static sign(payload,secret=JWT_SECRET,expiry='60s'){
         return jwt.sign(payload,secret,{expiresIn:expiry})
     }
-    static varify(token,secret){
+    static varify(token,secret=JWT_SECRET){
         return jwt.verify(token,secret)
     }
 }

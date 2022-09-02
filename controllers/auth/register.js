@@ -38,7 +38,6 @@ const register = {
                 password
             })
             const result = await user.save()
-            console.log(result)
             //issue jwt access token and refresh token
             access_token = JwtService.sign({ _id: result._id, role: result.role })
             refresh_token = JwtService.sign({ _id: result._id, role: user.role }, REFRESH_SECRET, '1y')
