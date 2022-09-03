@@ -4,9 +4,16 @@ const router = express.Router();
 const auth=require('../middlewares/auth')
 const { registrationcontroller, shopcontroller,refreshController,logincontroller } = require('../controllers');
 
-router.post('/registration', registrationcontroller.registration)
-router.post('/login',logincontroller.login)
-router.post('/refresh',refreshController.refresh)
+router.post('/auth/registration', registrationcontroller.registration)
+router.get('/auth/registration', (req,res,next)=>{
+    res.render('shop/registration',{
+        pageTitle:'registration',
+        path:'/auth/registration'
+    })
+})
+router.post('/auth/login',logincontroller.login)
+router.get('/auth/login',logincontroller.login)
+router.post('/auth/refresh',refreshController.refresh)
 router.get('/', shopcontroller.getIndex);
 router.get('/products', shopcontroller.getProducts);
 router.get('/products/:productId', shopcontroller.getProductDetails)
