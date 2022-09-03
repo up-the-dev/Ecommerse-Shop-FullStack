@@ -2,7 +2,7 @@ const Joi = require('joi')
 const { DEBUG_MODE } = require('../config')
 const CustomErrorHandler=require('../services/CustomErrorHandler')
 const errorHandler = async (err, req, res, next) => {
-    let status = 500
+    let status =  err.status || 500 
     let data = {
         msg: 'internal server error',
         ...(DEBUG_MODE === 'true' && { err: err.message })

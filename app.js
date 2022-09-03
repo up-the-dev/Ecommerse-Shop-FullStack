@@ -21,15 +21,18 @@ app.use(shopRoutes);
 app.use(errorHandler);
 app.use(errorController.get404)
 
-app.listen(APP_PORT, () => {
-    console.log(`server started at ${APP_PORT}`)
-});
 async function connection() {
     try {
         await mongoose.connect(DB_URL)
         console.log('db connected')
+
+        app.listen(APP_PORT, () => {
+            console.log(`server started at ${APP_PORT}`)
+        });
     } catch (err) {
         throw err
     }
 }
 connection()
+
+
