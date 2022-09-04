@@ -41,19 +41,19 @@ const shopController = {
       const productId = req.body.productId
       const result = await CartProduct.updateOne({},
         { $push: { products: [productId] } })
-        console.log(result)
-        const cartproduct=await CartProduct.find({})
-        cartproduct.forEach(productid=>{
-          console.log("HII")
-        })
-        res.render('shop/cart', {
-          path: '/cart',
-          pageTitle: 'cart',
-          cartProducts
-  
-        })
+      console.log(result)
+      const cartproduct = await CartProduct.find({})
+      cartproduct.forEach(productid => {
+        console.log("HII")
+      })
+      res.render('shop/cart', {
+        path: '/cart',
+        pageTitle: 'cart',
+        cartProducts
 
-      
+      })
+
+
     } catch (err) {
       return next(err)
     }
@@ -91,7 +91,8 @@ const shopController = {
       console.log(err)
       return err
     }
-  }
+  },
+  
 }
 
 module.exports = shopController

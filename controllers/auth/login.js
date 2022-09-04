@@ -40,6 +40,12 @@ const logincontroller = {
         }
         res.send({access_token,refresh_token})
 
+    },
+    getLogin:(req,res,next)=>{
+        res.render('shop/login',{
+            pageTitle:'login',
+            path:'/auth/login'
+        })
     }
 }
 module.exports=logincontroller

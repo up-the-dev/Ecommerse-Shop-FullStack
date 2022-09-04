@@ -50,6 +50,12 @@ const register = {
             return next(err)
         }
         res.json({ access_token, refresh_token })
-    }
+    },
+    getRegistration: (req, res, next) => {
+        res.render('shop/registration', {
+          pageTitle: 'registration',
+          path: '/auth/registration'
+        })
+      }
 }
 module.exports = register
