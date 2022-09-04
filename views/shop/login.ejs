@@ -1,0 +1,30 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/login.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+              <!-- Tabs Titles -->
+          
+              <!-- Icon -->
+              <div class="fadeIn first">
+                <img src="/img/userIcon.png" width="70px" alt="User Icon" />
+              </div>
+          
+              <!-- Login Form -->
+              <form action="/auth/login" method="post">
+                <input type="text" id="login" class="fadeIn second" name="email" placeholder="email">
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+                <input type="submit" class="fadeIn fourth" value="Log In">
+              </form>
+          
+              <!-- Remind Passowrd -->
+              <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+              </div>
+          
+            </div>
+          </div>
+            <%- include('../includes/end.ejs') %>
