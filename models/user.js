@@ -49,9 +49,9 @@ const userSchema = new Schema({
         },
         country:String
     }],
-    cartItems:[{
-        productId:mongoose.Types.ObjectId
-    }]
+    cartItems:[
+        mongoose.Types.ObjectId
+    ]
 
 },{timestamps:true})
 const User=new mongoose.model('User',userSchema)
