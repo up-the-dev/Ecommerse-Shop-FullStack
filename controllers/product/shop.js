@@ -1,5 +1,7 @@
 const { default: mongoose } = require('mongoose');
 const Product = require('../../models/product');
+const User = require('../../models/user');
+const CustomErrorHandler = require('../../services/CustomErrorHandler');
 
 const shopController = {
   getProducts: async (req, res, next) => {
@@ -28,9 +30,12 @@ const shopController = {
   },
   getCart: (req, res, next) => {
     try {
+      const CartProducts=await
+      
       res.render('shop/cart', {
         path: '/cart',
-        pageTitle: 'Your Cart'
+        pageTitle: 'cart',
+        cartProducts
       });
     } catch (err) {
       return next(err)
@@ -39,21 +44,12 @@ const shopController = {
   postCart: async (req, res, next) => {
     try {
       const productId = req.body.productId
-      const result = await CartProduct.updateOne({},
-        { $push: { products: [productId] } })
-      console.log(result)
-      const cartproduct = await CartProduct.find({})
-      cartproduct.forEach(productid => {
-        console.log("HII")
-      })
-      res.render('shop/cart', {
-        path: '/cart',
-        pageTitle: 'cart',
-        cartProducts
-
-      })
-
-
+      console.log(productId)
+      const added = await User.updateOne({ _id: req.user._id }, { $push: { cartItems: productId } })
+      if (!added) {
+        return next(CustomErrorHandler.unauthorized())
+      }
+      res.render('/cart')
     } catch (err) {
       return next(err)
     }
@@ -92,7 +88,7 @@ const shopController = {
       return err
     }
   },
-  
+
 }
 
 module.exports = shopController

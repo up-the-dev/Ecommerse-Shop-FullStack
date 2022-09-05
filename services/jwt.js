@@ -1,7 +1,7 @@
 const jwt=require('jsonwebtoken')
 const {JWT_SECRET}=require('../config')
 class JwtService{
-    static sign(payload,secret=JWT_SECRET,expiry='60s'){
+    static sign(payload,secret=JWT_SECRET,expiry='600s'){
         return jwt.sign(payload,secret,{expiresIn:expiry})
     }
     static varify(token,secret=JWT_SECRET){

@@ -9,6 +9,11 @@ class CustomErrorHandler extends Error {
         this.msg = msg
         return new CustomErrorHandler(this.status, this.msg)
     }
+    static notFound(msg = 'not found') {
+        this.status = 409
+        this.msg = msg
+        return new CustomErrorHandler(this.status, this.msg)
+    }
     static unauthorized(msg = 'unauthorized !') {
         this.status = 401
         this.msg = msg
