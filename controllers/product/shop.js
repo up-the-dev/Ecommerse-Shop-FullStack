@@ -28,13 +28,23 @@ const shopController = {
       return next(err)
     }
   },
-  getCart: (req, res, next) => {
+  getCart: async (req, res, next) => {
     try {
-      const CartProducts=await
-      
+
+      let user = await User.findOne({ _id: req.user._id })
+      if (!user) {
+        return next(CustomErrorHandler.unauthorized())
+      }
+      const userProducts = user.cartItems
+      const cartProducts = []
+      for (let prod of userProducts) {
+        const product = await Product.findOne({ _id: prod._id })
+        product.quantity=prod.quantity
+        cartProducts.push(product)
+      }
       res.render('shop/cart', {
         path: '/cart',
-        pageTitle: 'cart',
+        pageTitle: 'Cart',
         cartProducts
       });
     } catch (err) {
@@ -44,12 +54,21 @@ const shopController = {
   postCart: async (req, res, next) => {
     try {
       const productId = req.body.productId
-      console.log(productId)
-      const added = await User.updateOne({ _id: req.user._id }, { $push: { cartItems: productId } })
+      //checking if product already in cart
+      const exist=await User.findOne({cartItems: {
+        _id:productId
+      }})
+      if(exist){
+        return next(CustomErrorHandler.alreadyExist('Product already in cart!'))
+      }
+       //add productId to cart
+      const added = await User.updateOne({ _id: req.user._id }, { $push: { cartItems:{_id:productId}  } })
+      
       if (!added) {
         return next(CustomErrorHandler.unauthorized())
       }
-      res.render('/cart')
+      //redirect to cart page
+      res.redirect('/cart')
     } catch (err) {
       return next(err)
     }
@@ -73,7 +92,6 @@ const shopController = {
     } catch (err) {
       return next(err)
     }
-
   },
   getProductDetails: async (req, res, next) => {
     try {
@@ -88,7 +106,6 @@ const shopController = {
       return err
     }
   },
-
 }
 
 module.exports = shopController
