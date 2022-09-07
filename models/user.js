@@ -11,24 +11,24 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        unique:true,
+        unique: true,
         required: true
     },
     password: {
         type: String,
-        minlength:6,
+        minlength: 6,
         required: true
     },
     phone: {
         type: Number,
-        length:10,
+        length: 10,
         sparse: true,
-        unique:true
-        
+        unique: true
+
     },
-    role:{
-        type:String,
-        default:"Customer"
+    role: {
+        type: String,
+        default: "Customer"
     },
     address: [{
         _id: mongoose.Types.ObjectId,
@@ -47,12 +47,18 @@ const userSchema = new Schema({
         state: {
             type: String
         },
-        country:String
+        country: String
     }],
-    cartItems:[
-        mongoose.Types.ObjectId
-    ]
+    cartItems: [
+        {
+            _id: mongoose.Types.ObjectId,
+            quantity:{
+                type:Number,
+                default:1
+            }
 
-},{timestamps:true})
-const User=new mongoose.model('User',userSchema)
-module.exports=User
+        }
+    ]
+}, { timestamps: true })
+const User = new mongoose.model('User', userSchema)
+module.exports = User
