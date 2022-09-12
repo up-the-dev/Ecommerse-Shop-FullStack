@@ -49,7 +49,11 @@ const register = {
         } catch (err) {
             return next(err)
         }
-        res.json({ access_token, refresh_token })
+        res.cookie('token',access_token,{
+            httpOnly:true
+        })
+        alert('registered SuccessFully !')
+        window.history.go(-1)
     },
     getRegistration: (req, res, next) => {
         res.render('shop/registration', {

@@ -30,7 +30,7 @@ const logincontroller = {
                 return next(CustomErrorHandler.unauthorized('Wrong Password !'))
             }
             access_token = await JwtService.sign({ _id: user._id, role: user.role })
-            refresh_token = await JwtService.sign({ _id: user._id, role: user.role })
+            refresh_token = await JwtService.sign({ _id: user._id, role: user.role }, REFRESH_SECRET, '7d')
             const refreshtoken =new RefreshToken({
                 token:refresh_token
             })
@@ -38,7 +38,11 @@ const logincontroller = {
         } catch (error) {
             return next(error)
         }
-        res.send({access_token,refresh_token})
+        res.cookie('token',access_token,{
+            httpOnly:true,
+            maxAge:10000
+        })
+        res.redirect('/')
 
     },
     getLogin:(req,res,next)=>{

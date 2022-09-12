@@ -15,7 +15,8 @@
                                     </h1>
                                 </header>
                                 <div class="card__image">
-                                    <img src="<%= product.imageUrl %>" width="318px" height="212px" alt="<%= product.title %>">
+                                    <img src="<%= product.imageUrl %>" width="318px" height="212px"
+                                        alt="<%= product.title %>">
                                 </div>
                                 <div class="card__content">
                                     <h2 class="product__price">$ <%= product.price %>
@@ -29,7 +30,10 @@
                                     <form action="/products/<%= product._id %>" method="get"> <button type="submit"
                                             class="btn">Details</button>
                                     </form>
-                                    <button class="btn">Add to Cart</button>
+                                    <form action="/cart" method="post">
+                                        <button class="btn">Add to Cart</button>
+                                        <input type="hidden" name="productId" value="<%= product._id %>">
+                                    </form>
                                 </div>
                             </article>
                             <% } %>
