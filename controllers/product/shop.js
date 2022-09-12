@@ -31,17 +31,13 @@ const shopController = {
   getCart: async (req, res, next) => {
     try {
 
-      let user = await User.findOne({ _id: req.user._id })
+      let user = await User.findOne({ _id: req.user._id }).populate('cartItems._id')
+      console.log('user'+user)
       if (!user) {
         return next(CustomErrorHandler.unauthorized())
       }
-      const userProducts = user.cartItems
-      const cartProducts = []
-      for (let prod of userProducts) {
-        const product = await Product.findOne({ _id: prod._id })
-        product.quantity=prod.quantity
-        cartProducts.push(product)
-      }
+      const cartProducts = user.cartItems
+      console.log('cartproducts',cartProducts)
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Cart',

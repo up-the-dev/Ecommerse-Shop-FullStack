@@ -4,5 +4,6 @@ module.exports = {
     registrationcontroller: require('./auth/register'),
     refreshController: require('../controllers/auth/refresh'),
     logincontroller:require('../controllers/auth/login'),
-    profileController:require('../controllers/profile')
+    profileController:require('../controllers/profile'),
+    logOutController:require('./auth/logout')
 }

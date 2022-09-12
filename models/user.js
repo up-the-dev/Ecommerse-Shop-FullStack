@@ -51,7 +51,10 @@ const userSchema = new Schema({
     }],
     cartItems: [
         {
-            _id: mongoose.Types.ObjectId,
+            _id:{
+                type:mongoose.Types.ObjectId,
+                ref:'Product'
+            },
             quantity:{
                 type:Number,
                 default:1
