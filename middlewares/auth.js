@@ -1,11 +1,22 @@
-const JwtService = require("../services/jwt")
+const CustomErrorHandler = require("../services/CustomErrorHandler")
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = require('../config')
 
 const auth = async (req, res, next) => {
-    let token = req.cookies.token
+    console.log('from auth')
+    let token = req.cookies.access_token
     if (token) {
         let user
         try {
-            const { _id, role } = await JwtService.varify(token)
+            const { _id, role } = await jwt.verify(token, JWT_SECRET,async (err,decoder) => {
+                if (err) {
+                    if (err instanceof jwt.TokenExpiredError) {
+                        await res.redirect('/auth/refresh')
+                    } else {
+                        return next(CustomErrorHandler.unauthorized(err.message))
+                    }
+                }
+            })
             user = {
                 _id, role
             }
@@ -15,6 +26,7 @@ const auth = async (req, res, next) => {
         req.user = user
         next()
     } else {
+        console.log('token not found !')
         res.redirect('/auth/login')
     }
 }

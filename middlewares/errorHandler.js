@@ -11,10 +11,12 @@ const errorHandler = async (err, req, res, next) => {
     if(err instanceof Joi.ValidationError){
         status=422,
         data={
-            msg:err.message
         }
+        msg:err.message
     }
     if(err instanceof CustomErrorHandler){
+        console.log('from errorhandler')
+
         status=err.status,
         data={
             msg:err.msg

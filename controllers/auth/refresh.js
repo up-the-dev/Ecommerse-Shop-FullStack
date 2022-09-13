@@ -41,7 +41,7 @@ const refreshController = {
             }
             //generating new tokens
             access_token = await JwtService.sign({ _id: user._id, role: user.role })
-            refresh_token = await JwtService.sign({ _id: user._id, role: user.role }, REFRESH_SECRET)
+            refresh_token = await JwtService.sign({ _id: user._id, role: user.role }, REFRESH_SECRET,'7d')
             //saving refreshtoken
             const token = new RefreshToken({
                 token: refresh_token
@@ -50,7 +50,14 @@ const refreshController = {
         } catch (err) {
             return next(err)
         }
-        res.json({ access_token, refresh_token })
+        res.cookie('access_token',access_token,{
+            httpOnly:true
+        })
+        res.cookie('refresh_token',refresh_token,{
+            httpOnly:true
+        })
+        console.log('from refresh')
+        res.redirect('back')
     }
 }
 module.exports = refreshController

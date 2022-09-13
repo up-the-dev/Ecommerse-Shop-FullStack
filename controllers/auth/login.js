@@ -3,6 +3,7 @@ const User = require("../../models/user")
 const bcrypt = require('bcrypt')
 const JwtService = require('../../services/jwt')
 const {RefreshToken}=require('../../models/refreshToken')
+const { REFRESH_SECRET } = require('../../config')
 const CustomErrorHandler = require("../../services/CustomErrorHandler")
 
 const logincontroller = {
@@ -38,9 +39,11 @@ const logincontroller = {
         } catch (error) {
             return next(error)
         }
-        res.cookie('token',access_token,{
-            httpOnly:true,
-            maxAge:10000
+        res.cookie('access_token',access_token,{
+            httpOnly:true
+        })
+        res.cookie('refresh_token',refresh_token,{
+            httpOnly:true
         })
         res.redirect('/')
 
