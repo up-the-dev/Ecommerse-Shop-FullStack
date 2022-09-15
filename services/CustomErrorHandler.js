@@ -19,5 +19,10 @@ class CustomErrorHandler extends Error {
         this.msg = msg
         return new CustomErrorHandler(this.status, this.msg)
     }
+    static jwtExpired(msg = 'unauthorized !') {
+        this.status = 403
+        this.msg = msg
+        return new CustomErrorHandler(this.status, this.msg)
+    }
 }
 module.exports = CustomErrorHandler

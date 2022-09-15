@@ -47,8 +47,6 @@ const productController = {
     try {
       const productId = req.params.productId
       const product = await Product.findOne({ _id: productId })
-      console.log(product)
-
       res.render('admin/edit-product', {
         path: '/admin/edit-product',
         pageTitle: 'Edit Products',
