@@ -1,6 +1,8 @@
 const { default: mongoose } = require('mongoose');
 const Product = require('../../models/product');
 const User = require('../../models/user');
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = require('../../config')
 const CustomErrorHandler = require('../../services/CustomErrorHandler');
 
 const shopController = {
@@ -30,14 +32,11 @@ const shopController = {
   },
   getCart: async (req, res, next) => {
     try {
-
       let user = await User.findOne({ _id: req.user._id }).populate('cartItems._id')
-      console.log('user'+user)
       if (!user) {
         return next(CustomErrorHandler.unauthorized())
       }
       const cartProducts = user.cartItems
-      console.log('cartproducts',cartProducts)
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Cart',
@@ -51,15 +50,20 @@ const shopController = {
     try {
       const productId = req.body.productId
       //checking if product already in cart
-      const exist=await User.findOne({cartItems: {
-        _id:productId
-      }})
-      if(exist){
+      const userId = req.user._id
+      const exist = await User.findOne({
+        _id: userId,
+        cartItems: {
+          _id: productId
+        }
+      })
+      if (exist) {
         return next(CustomErrorHandler.alreadyExist('Product already in cart!'))
       }
-       //add productId to cart
-      const added = await User.updateOne({ _id: req.user._id }, { $push: { cartItems:{_id:productId}  } })
-      
+
+      //add productId to cart
+      const added = await User.updateOne({ _id: req.user._id }, { $push: { cartItems: { _id: productId } } })
+
       if (!added) {
         return next(CustomErrorHandler.unauthorized())
       }
@@ -98,8 +102,7 @@ const shopController = {
         product
       })
     } catch (err) {
-      console.log(err)
-      return err
+      return next(err)
     }
   },
 }
