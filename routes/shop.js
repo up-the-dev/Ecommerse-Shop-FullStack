@@ -7,7 +7,7 @@ const { registrationcontroller, logOutController,shopcontroller,refreshControlle
 router.post('/auth/registration', registrationcontroller.registration)
 router.get('/auth/registration', registrationcontroller.getRegistration)
 router.post('/auth/login',logincontroller.login)
-router.post('/auth/logOut',auth,logOutController.logOut)
+//router.post('/auth/logOut',auth,logOutController.logOut)
 router.get('/auth/login',logincontroller.getLogin)
 router.get('/profile',auth,profileController.getProfile)
 router.post('/auth/refresh',refreshController.refresh)
