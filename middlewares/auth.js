@@ -4,7 +4,7 @@ const { JWT_SECRET } = require('../config')
 const refreshController = require("../controllers/auth/refresh")
 
 const auth = async (req, res, next) => {
-    console.log('refreshToken:  '+req.cookies.refresh_token)
+   
     let token = req.cookies.access_token
     if (token) {
         let user

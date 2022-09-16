@@ -1,5 +1,5 @@
 const Product = require('../../models/product');
-const { productSchema } = require('../../validators/productValidator');
+const { productSchema } = require('../../validators');
 const productController = {
   getAddProduct: (req, res, next) => {
     try {

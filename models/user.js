@@ -14,6 +14,9 @@ const userSchema = new Schema({
         unique: true,
         required: true
     },
+    imgUrl:{
+        type:String
+    },
     password: {
         type: String,
         minlength: 6,
@@ -24,7 +27,6 @@ const userSchema = new Schema({
         length: 10,
         sparse: true,
         unique: true
-
     },
     role: {
         type: String,
@@ -51,22 +53,26 @@ const userSchema = new Schema({
     }],
     cartItems: [
         {
-            _id:{
-                type:mongoose.Types.ObjectId,
-                ref:'Product'
+            _id: {
+                type: mongoose.Types.ObjectId,
+                ref: 'Product'
             },
-            quantity:{
-                type:Number,
-                default:1
+            quantity: {
+                type: Number,
+                default: 1
             }
 
         }
     ],
-    refreshToken:{
-        token:{
-            type:String
+    refreshToken: {
+        token: {
+            type: String
         }
     }
-}, { timestamps: true })
+}, { timestamps: true, toJSON: { getters: true } })
+
+userSchema.virtual('fullName').get(function () {
+    return `${this.firstName} ${this.lastName}`
+});
 const User = new mongoose.model('User', userSchema)
 module.exports = User
