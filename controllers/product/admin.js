@@ -79,7 +79,6 @@ const productController = {
     try {
       const productId = req.params.productId
       const result = await Product.findOneAndRemove({ _id: productId })
-      console.log(result)
       res.redirect('/admin/products')
     } catch (error) {
       return next(error)

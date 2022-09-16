@@ -4,14 +4,14 @@
     <body>
         <%- include('../includes/navigation.ejs') %>
             <section class="vh-100" style="background-color: #fdfcfb;">
-                <div class="container h-100">
+                <div class="container mt-5">
                     <%let total=0%>
                         <% if(cartProducts.length==0){%>
                             <h1 style="margin-left: 35vw;margin-top: 5vh;">Cart is empty</h1>
                             <%}else{%>
-                                <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="row d-flex justify-content-center align-items-center h-50">
                                     <div class="col">
-                                        <p><span class="h2">Shopping Cart </span></p>
+                                       
                                         <%for(let prod of cartProducts){%>
                                             <div class="card mb-4">
                                                 <div class="card-body p-4">
@@ -37,14 +37,14 @@
                                                         <div class="col-md-2 d-flex justify-content-center">
                                                             <div>
                                                                 <p class="small text-muted mb-4 pb-2">Price</p>
-                                                                <p class="lead fw-normal mb-0">$<%=prod._id.price%>
+                                                                <p class="lead fw-normal mb-0">Rs<%=prod._id.price%>
                                                                 </p>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2 d-flex justify-content-center">
                                                             <div>
                                                                 <p class="small text-muted mb-4 pb-2">Total</p>
-                                                                <p class="lead fw-normal mb-0">$<%=prod._id.price%>
+                                                                <p class="lead fw-normal mb-0">Rs<%=prod._id.price%>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -59,14 +59,13 @@
                                     </div>
                                 </div>
                 </div>
-
                 
-                <div class="card mb-5">
-                    <div class="card-body p-4">
+                <div class="card mb-3 mt-5">
+                    <div class="card-body p-3">
                         <div class="float-end">
                             <p class="mb-0 me-5 d-flex align-items-center">
                                 <span class="small text-muted me-2">Order
-                                    total:</span> <span class="lead fw-normal">$
+                                    total:</span> <span class="lead fw-normal">Rs
                                     <%=total%>
                                 </span>
                             </p>
@@ -76,8 +75,7 @@
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-light btn-lg me-2">Continue
                         shopping</button>
-                    <button type="button" class="btn btn-primary btn-lg">Add to
-                        cart</button>
+                    <button type="button" class="btn btn-primary btn-lg">CheckOut</button>
                 </div>
             </section>
             <%- include('../includes/end.ejs') %>

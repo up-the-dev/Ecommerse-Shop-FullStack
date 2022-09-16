@@ -2,12 +2,11 @@ const Joi = require("joi")
 const User = require("../../models/user")
 const bcrypt = require('bcrypt')
 const JwtService = require('../../services/jwt')
-const {RefreshToken}=require('../../models/refreshToken')
 const { REFRESH_SECRET } = require('../../config')
 const CustomErrorHandler = require("../../services/CustomErrorHandler")
 
 const logincontroller = {
-    login: async (req,res,next) => {
+    login: async (req, res, next) => {
         //request validation
         const loginSchema = Joi.object({
             email: Joi.string().email().required(),
@@ -32,27 +31,25 @@ const logincontroller = {
             }
             access_token = await JwtService.sign({ _id: user._id, role: user.role })
             refresh_token = await JwtService.sign({ _id: user._id, role: user.role }, REFRESH_SECRET, '7d')
-            const refreshtoken =new RefreshToken({
-                token:refresh_token
-            })
-            await refreshtoken.save()
+            //saving refresh_token in db inside user model
+            await User.updateOne({ _id: user._id }, { $set: { "refreshToken.token": refresh_token } })
         } catch (error) {
             return next(error)
         }
-        res.cookie('access_token',access_token,{
-            httpOnly:true
+        res.cookie('access_token', access_token, {
+            httpOnly: true
         })
-        res.cookie('refresh_token',refresh_token,{
-            httpOnly:true
+        res.cookie('refresh_token', refresh_token, {
+            httpOnly: true
         })
         res.redirect('/')
 
     },
-    getLogin:(req,res,next)=>{
-        res.render('shop/login',{
-            pageTitle:'login',
-            path:'/auth/login'
+    getLogin: (req, res, next) => {
+        res.render('shop/login', {
+            pageTitle: 'login',
+            path: '/auth/login'
         })
     }
 }
-module.exports=logincontroller
+module.exports = logincontroller

@@ -4,7 +4,6 @@ const CustomErrorHandler = require('../../services/CustomErrorHandler')
 const bcrypt = require('bcrypt')
 const JwtService = require('../../services/jwt')
 const { REFRESH_SECRET } = require('../../config')
-const { RefreshToken } = require('../../models/refreshToken')
 const register = {
     registration: async (req, res, next) => {
         //request validation
@@ -42,27 +41,24 @@ const register = {
             access_token = JwtService.sign({ _id: result._id, role: result.role })
             refresh_token = JwtService.sign({ _id: result._id, role: user.role }, REFRESH_SECRET, '1y')
             //save refresh token in db
-            const refreshtoken = new RefreshToken({
-                token: refresh_token
-            })
-            await refreshtoken.save()
+            await User.updateOne({ _id: result._id }, { "refreshToken.token": refresh_token })
         } catch (err) {
             return next(err)
         }
-        res.cookie('access_token',access_token,{
-            httpOnly:true
+        res.cookie('access_token', access_token, {
+            httpOnly: true
         })
-        res.cookie('refresh_token',refresh_token,{
-            httpOnly:true
+        res.cookie('refresh_token', refresh_token, {
+            httpOnly: true
         })
         res.redirect('/')
 
     },
     getRegistration: (req, res, next) => {
         res.render('shop/registration', {
-          pageTitle: 'registration',
-          path: '/auth/registration'
+            pageTitle: 'registration',
+            path: '/auth/registration'
         })
-      }
+    }
 }
 module.exports = register

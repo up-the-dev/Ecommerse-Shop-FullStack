@@ -61,7 +61,12 @@ const userSchema = new Schema({
             }
 
         }
-    ]
+    ],
+    refreshToken:{
+        token:{
+            type:String
+        }
+    }
 }, { timestamps: true })
 const User = new mongoose.model('User', userSchema)
 module.exports = User

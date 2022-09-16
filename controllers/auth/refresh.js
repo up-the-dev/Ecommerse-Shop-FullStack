@@ -1,5 +1,3 @@
-const Joi = require('joi')
-const { RefreshToken } = require('../../models/refreshToken')
 const CustomErrorHandler = require('../../services/CustomErrorHandler')
 const JwtService = require('../../services/jwt')
 const { REFRESH_SECRET } = require('../../config')
@@ -10,7 +8,8 @@ const refreshController = {
         //does refresh token exist
         const token = req.cookies.refresh_token
         try {
-            const exist = await RefreshToken.findOne({ token: token })
+            console.log()
+            const exist = await User.findOne({ "refreshToken.token": token })
             if (!exist) {
                 return next(CustomErrorHandler.unauthorized('token not found'))
             }
@@ -33,7 +32,7 @@ const refreshController = {
         }
         try {
             //deleting refreshToken(one time use)
-            await RefreshToken.findOneAndRemove({ token: token})
+            await User.updateOne({ _id: userObj._id }, { $unset: { "refreshToken.token": 1 } })
             //does user exist
             const user = await User.findOne({ _id: userObj._id })
             if (!user) {
@@ -43,10 +42,8 @@ const refreshController = {
             access_token = await JwtService.sign({ _id: user._id, role: user.role })
             refresh_token = await JwtService.sign({ _id: user._id, role: user.role }, REFRESH_SECRET, '7d')
             //saving refreshtoken
-            const refreshT = new RefreshToken({
-                token: refresh_token
-            })
-            await refreshT.save()
+
+            await User.updateOne({ _id: user._id }, { $set: { "refreshToken.token": refresh_token } })
         } catch (err) {
             return next(err)
         }
