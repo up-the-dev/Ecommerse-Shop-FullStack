@@ -3,21 +3,21 @@
 }
 
 .form-control label,
-.form-control input,
+.form-control input name="lastName",
 .form-control textarea {
   display: block;
   width: 100%;
   margin-bottom: 0.25rem;
 }
 
-.form-control input,
+.form-control input name="lastName",
 .form-control textarea {
   border: 1px solid #a1a1a1;
   font: inherit;
   border-radius: 2px;
 }
 
-.form-control input:focus,
+.form-control input name="lastName":focus,
 .form-control textarea:focus {
   outline-color: #00695c;
 }
@@ -78,7 +78,7 @@ body{
     font-weight: 700;
 }
 
-.wrapper .form-left input{
+.wrapper .form-left input name="lastName"{
     padding: 15px;
     background: #fff;
     border-top-left-radius: 5px;
@@ -94,7 +94,7 @@ body{
     outline: none;
 }
 
-.wrapper .form-left input:hover{
+.wrapper .form-left input name="lastName":hover{
     background-color: #f2f2f2;
 }
 
@@ -116,7 +116,7 @@ body{
     margin-bottom: 8px;
 }
 
-.wrapper .form-right .input-field{
+.wrapper .form-right .input name="lastName"-field{
     width: 100%;
     padding: 10px 15px;
     border: 1px solid #e5e5e5;
@@ -126,7 +126,7 @@ body{
     color: #333;
 }
 
-.wrapper .form-right .input-field:focus{
+.wrapper .form-right .input name="lastName"-field:focus{
     border: 1px solid #31a031;
 }
 
@@ -142,7 +142,7 @@ body{
     user-select: none
 }
 
-.wrapper .option input {
+.wrapper .option input name="lastName" {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -161,11 +161,11 @@ body{
     border-radius: 2px
 }
 
-.wrapper .option:hover input~.checkmark {
+.wrapper .option:hover input name="lastName"~.checkmark {
     background-color: #f1f1f1
 }
 
-.wrapper .option input:checked~.checkmark {
+.wrapper .option input name="lastName":checked~.checkmark {
     border: 2px solid #e5e5e5;
     background-color: #fff;
     transition: 300ms ease-in-out all
@@ -179,7 +179,7 @@ body{
     font-size: 1rem;
 }
 
-.wrapper .option input:checked~.checkmark:after {
+.wrapper .option input name="lastName":checked~.checkmark:after {
     display: block
 }
 

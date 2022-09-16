@@ -10,6 +10,8 @@ router.post('/auth/login',logincontroller.login)
 //router.post('/auth/logOut',auth,logOutController.logOut)
 router.get('/auth/login',logincontroller.getLogin)
 router.get('/profile',auth,profileController.getProfile)
+router.get('/edit-profile',auth,profileController.geteditProfile)
+router.post('/edit-profile',auth,profileController.editProfile)
 router.post('/auth/refresh',refreshController.refresh)
 router.get('/', shopcontroller.getIndex);
 router.get('/products', shopcontroller.getProducts);

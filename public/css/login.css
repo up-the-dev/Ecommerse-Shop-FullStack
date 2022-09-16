@@ -81,7 +81,7 @@ html {
   
   /* FORM TYPOGRAPHY*/
   
-  input[type=button], input[type=submit], input[type=reset]  {
+  input name="lastName"[type=button], input name="lastName"[type=submit], input name="lastName"[type=reset]  {
     background-color: #56baed;
     border: none;
     color: white;
@@ -103,11 +103,11 @@ html {
     transition: all 0.3s ease-in-out;
   }
   
-  input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  input name="lastName"[type=button]:hover, input name="lastName"[type=submit]:hover, input name="lastName"[type=reset]:hover  {
     background-color: #39ace7;
   }
   
-  input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+  input name="lastName"[type=button]:active, input name="lastName"[type=submit]:active, input name="lastName"[type=reset]:active  {
     -moz-transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -o-transform: scale(0.95);
@@ -115,7 +115,7 @@ html {
     transform: scale(0.95);
   }
   
-  input[type=text] {
+  input name="lastName"[type=text] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -135,7 +135,7 @@ html {
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
   }
-  input[type=password] {
+  input name="lastName"[type=password] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -153,12 +153,12 @@ html {
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
   }
-  input[type=text]:focus {
+  input name="lastName"[type=text]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
   }
   
-  input[type=text]:placeholder {
+  input name="lastName"[type=text]:placeholder {
     color: #cccccc;
   }
   

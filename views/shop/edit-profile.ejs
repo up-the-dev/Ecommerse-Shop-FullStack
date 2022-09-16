@@ -1,0 +1,183 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/profile.css">
+
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <div class="container">
+                <div class="row gutters">
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="account-settings">
+                                    <div class="user-profile">
+                                        <div class="user-avatar">
+                                            <%if(!user.imgUrl){%>
+                                                <img src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
+                                                    alt="profile pic" class="rounded-circle" width="150">
+                                                <%}else{%>
+                                                    <img src="<%=user.imgUrl%>" alt="profile pic" class="rounded-circle"
+                                                        width="213">
+                                                    <%}%>
+                                        </div>
+                                        <h5 class="user-name">
+                                            <%=user.fullName%>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                        <div class="card h-100">
+                            <form class="card-body" action="/edit-profile" method="post">
+                                <div class="row gutters">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <h5 class="mt-1 mb-4 text-primary">Personal Details</h5>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <h6>
+                                                <label for="firstName">First Name</label>
+                                            </h6>
+                                            <input name="firstName" type="text" class="form-control" id="firstName"
+                                                value="<%=user.firstName%>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <h6>
+                                                <label for="lastName">Last Name</label>
+                                            </h6>
+                                            <input name="lastName" type="text" class="form-control" id="lastName"
+                                                value="<%=user.lastName%>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+
+                                            <h6><label class="mt-2" for="phone">Phone</label></h6>
+                                            <input name="phone" type="text" class="form-control" id="phone"
+                                                value="<%=user.phone%>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+
+                                            <h6>
+                                                <label for="email" class="mt-2">Email</label>
+                                            </h6>
+                                            <input name="email" type="email" class="form-control" id="email"
+                                                value="<%=user.email%>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+
+                                            <h6><label class="mt-2" for="imgUrl">Profile Picture URL</label></h6>
+                                            <input name="imgUrl" type="url" class="form-control" id="imgUrl"
+                                                value="<%=user.imgUrl%>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row gutters">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <h5 class="mt-5 mb-3 text-primary">Address</h5>
+                                    </div>
+                                    <%if(user.address.length===0){%>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <h6><label class="mt-2" for="addressLine1">Address Line 1</label></h6>
+                                                <input name="addressLine1" type="addressLine1" class="form-control"
+                                                    id="addressLine1" placeholder="enter addressLine1">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <h6><label class="mt-2" for="city">City</label></h6>
+                                                <input name="city" type="city" class="form-control" id="city"
+                                                    placeholder="enter city">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+
+                                                <h6><label class="mt-2" for="state">State</label></h6>
+                                                <input name="state" type="text" class="form-control" id="state"
+                                                    placeholder="enter state">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+
+                                                <h6> <label class="mt-2" for="pincode">Pin Code</label></h6>
+                                                <input name="pincode" type="text" class="form-control" id="pincode"
+                                                    placeholder="enter pincode">
+                                            </div>
+                                        </div>
+
+                                        <%}else{%>
+                                            <%for(let add of user.address){%>
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                    <div class="form-group">
+                                                        <h6><label class="mt-2" for="addressLine1">Address Line
+                                                                1</label></h6>
+                                                        <input name="addressLine1" type="addressLine1"
+                                                            class="form-control" id="addressLine1"
+                                                            value="<%add.addressLine1%>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                    <div class="form-group">
+                                                        <h6><label class="mt-2" for="city">City</label></h6>
+                                                        <input name="city" type="city" class="form-control" id="city"
+                                                            value="<%add.city%>">
+                                                    </div>
+                                                </div>
+                           
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                    <div class="form-group">
+
+                                                        <h6> <label class="mt-2" for="pincode">Pin Code</label></h6>
+                                                        <input name="pincode" type="text" class="form-control"
+                                                            id="pincode" value="<%add.pincode%>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                    <div class="form-group">
+
+                                                        <h6><label class="mt-2" for="state">State</label></h6>
+                                                        <input name="state" type="text" class="form-control" id="state"
+                                                            value="<%add.state%>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                    <div class="form-group">
+
+                                                        <h6><label class="mt-2" for="country">Country</label></h6>
+                                                        <input name="country" type="text" class="form-control" id="country"
+                                                            value="<%add.country%>">
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                                    <%}%>
+
+                                </div>
+
+                                <div class="row gutters">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="mt-4">
+                                            <a class="btn btn-secondary" href="/profile">Cancel</a>
+
+                                            <input type="submit" id="submit" name="submit" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('../includes/end.ejs') %>

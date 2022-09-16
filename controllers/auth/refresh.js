@@ -8,7 +8,6 @@ const refreshController = {
         //does refresh token exist
         const token = req.cookies.refresh_token
         try {
-            console.log()
             const exist = await User.findOne({ "refreshToken.token": token })
             if (!exist) {
                 return next(CustomErrorHandler.unauthorized('token not found'))
