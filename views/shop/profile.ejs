@@ -12,16 +12,18 @@
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <%if(!user.imgUrl){%>
-                                        <img src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg" alt="profile pic"
-                                            class="rounded-circle" width="150">
+                                            <img src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
+                                                alt="profile pic" class="rounded-circle" width="150">
                                             <%}else{%>
-                                                <img src="<%=user.imgUrl%>" alt="profile pic"
-                                                class="rounded-circle" width="213">
+                                                <img src="<%=user.imgUrl%>" alt="profile pic" class="rounded-circle"
+                                                    width="213">
                                                 <%}%>
 
-                                        <div class="mt-3">
-                                            <h4><%=user.fullName%></h4>
-                                        </div>
+                                                    <div class="mt-3">
+                                                        <h4>
+                                                            <%=user.fullName%>
+                                                        </h4>
+                                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -60,16 +62,15 @@
                                         <div class="col-sm-3">
                                             <h5 class="mb-0">Address</h5>
                                         </div>
-                                        <%for(let add of user.address){%>
                                         <div class="col-sm-9 text-secondary">
-                                            
-                                                <%add.addressLine1%>,
-                                                <%add.city%>,
-                                                <%add.pincode%>,
-                                                <%add.state%>,
-                                                <%add.country%>
+
+                                            <%=user.address.addressLine1%>,
+                                                <%=user.address.city%>,
+                                                    <%=user.address.pincode%>,
+                                                        <%=user.address.state%>,
+                                                            <%=user.address.country%>
                                         </div>
-                                        <%}%>
+
                                     </div>
                                     <hr>
                                     <div class="row">

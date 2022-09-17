@@ -39,15 +39,17 @@ const profileController = {
     editProfile: async (req, res, next) => {
         try {
             //validation
+            console.log('validaton joi started')
             const { error } = await editProfileSchema.validate(req.body)
             if (error) {
                 return next(error)
             }
+            console.log('validaton joi started')
             const userId = req.user._id
             const { firstName, lastName, phone, email, imgUrl, addressLine1, city,  pincode,state,country } = req.body
             const result = await User.updateOne({ _id: userId }, {
                 firstName, lastName, phone, email, imgUrl,
-                $addToSet: { addressLine1, city, pincode, state,country }
+                address: { addressLine1, city, pincode, state,country }
 
             })
             res.redirect('/profile')

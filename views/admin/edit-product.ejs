@@ -9,15 +9,15 @@
                 <form class="product-form" action="/admin/edit-product/<%=product._id%>" method="POST">
                     <div class="form-control">
                         <label for="title">Title</label>
-                        <input name="lastName" type="text" name="title" id="title" value="<%= product.title %>" required>
+                        <input   type="text" name="title" id="title" value="<%= product.title %>" required>
                     </div>
                     <div class="form-control">
                         <label for="imageUrl">Image URL</label>
-                        <input name="lastName" type="text" name="imageUrl" id="imageUrl" value="<%= product.imageUrl %>" required>
+                        <input   type="text" name="imageUrl" id="imageUrl" value="<%= product.imageUrl %>" required>
                     </div>
                     <div class="form-control">
                         <label for="price">Price</label>
-                        <input name="lastName" type="number" name="price" id="price" step="0.01" value="<%= product.price %>" required>
+                        <input   type="number" name="price" id="price" step="0.01" value="<%= product.price %>" required>
                     </div>
                     <div class="form-control">
                         <label for="description">Description</label>

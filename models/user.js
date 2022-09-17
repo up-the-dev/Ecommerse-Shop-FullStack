@@ -32,7 +32,7 @@ const userSchema = new Schema({
         type: String,
         default: "Customer"
     },
-    address: [{
+    address: {
         _id: mongoose.Types.ObjectId,
         type: {
             type: String
@@ -50,7 +50,7 @@ const userSchema = new Schema({
             type: String
         },
         country: String
-    }],
+    },
     cartItems: [
         {
             _id: {
