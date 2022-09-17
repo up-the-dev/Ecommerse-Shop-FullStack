@@ -64,7 +64,6 @@ body{
 }
 .account-settings .user-profile .user-avatar img {
     width: 190px;
-
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
