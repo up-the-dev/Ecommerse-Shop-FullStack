@@ -85,84 +85,48 @@
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <h5 class="mt-5 mb-3 text-primary">Address</h5>
                                     </div>
-                                    <%if(user.address.length===0){%>
 
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <h6><label class="mt-2" for="addressLine1">Address Line 1</label></h6>
-                                                <input name="addressLine1" type="addressLine1" class="form-control"
-                                                    id="addressLine1" placeholder="enter addressLine1">
-                                            </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <h6><label class="mt-2" for="addressLine1">Address Line
+                                                    1</label></h6>
+                                            <input name="addressLine1" type="addressLine1" class="form-control"
+                                                id="addressLine1" value="<%=user.address.addressLine1%>">
                                         </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <h6><label class="mt-2" for="city">City</label></h6>
-                                                <input name="city" type="city" class="form-control" id="city"
-                                                    placeholder="enter city">
-                                            </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <h6><label class="mt-2" for="city">City</label></h6>
+                                            <input name="city" type="city" class="form-control" id="city"
+                                                value="<%=user.address.city%>">
                                         </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
+                                    </div>
 
-                                                <h6><label class="mt-2" for="state">State</label></h6>
-                                                <input name="state" type="text" class="form-control" id="state"
-                                                    placeholder="enter state">
-                                            </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+
+                                            <h6> <label class="mt-2" for="pincode">Pin Code</label></h6>
+                                            <input name="pincode" type="text" class="form-control" id="pincode"
+                                                value="<%=user.address.pincode%>">
                                         </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
 
-                                                <h6> <label class="mt-2" for="pincode">Pin Code</label></h6>
-                                                <input name="pincode" type="text" class="form-control" id="pincode"
-                                                    placeholder="enter pincode">
-                                            </div>
+                                            <h6><label class="mt-2" for="state">State</label></h6>
+                                            <input name="state" type="text" class="form-control" id="state"
+                                                value="<%=user.address.state%>">
                                         </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
 
-                                        <%}else{%>
-                                            <%for(let add of user.address){%>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-                                                        <h6><label class="mt-2" for="addressLine1">Address Line
-                                                                1</label></h6>
-                                                        <input name="addressLine1" type="addressLine1"
-                                                            class="form-control" id="addressLine1"
-                                                            value="<%add.addressLine1%>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-                                                        <h6><label class="mt-2" for="city">City</label></h6>
-                                                        <input name="city" type="city" class="form-control" id="city"
-                                                            value="<%add.city%>">
-                                                    </div>
-                                                </div>
-                           
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
+                                            <h6><label class="mt-2" for="country">Country</label></h6>
+                                            <input name="country" type="text" class="form-control" id="country"
+                                                value="<%=user.address.country%>">
+                                        </div>
+                                    </div>
 
-                                                        <h6> <label class="mt-2" for="pincode">Pin Code</label></h6>
-                                                        <input name="pincode" type="text" class="form-control"
-                                                            id="pincode" value="<%add.pincode%>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-
-                                                        <h6><label class="mt-2" for="state">State</label></h6>
-                                                        <input name="state" type="text" class="form-control" id="state"
-                                                            value="<%add.state%>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-
-                                                        <h6><label class="mt-2" for="country">Country</label></h6>
-                                                        <input name="country" type="text" class="form-control" id="country"
-                                                            value="<%add.country%>">
-                                                    </div>
-                                                </div>
-                                                <%}%>
-                                                    <%}%>
 
                                 </div>
 
