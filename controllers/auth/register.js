@@ -53,12 +53,6 @@ const register = {
         })
         res.redirect('/')
 
-    },
-    getRegistration: (req, res, next) => {
-        res.render('shop/registration', {
-            pageTitle: 'registration',
-            path: '/auth/registration'
-        })
     }
 }
 module.exports = register

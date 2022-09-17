@@ -8,6 +8,7 @@
   display: block;
   width: 100%;
   margin-bottom: 0.25rem;
+  
 }
 
 .form-control input  ,
@@ -31,7 +32,6 @@
 
 body{
     background: #fff;
-    min-height: 100vh;
 }
 
 .wrapper{
@@ -40,9 +40,18 @@ body{
     border-radius: 10px;
     position: relative;
     display: flex;
-    margin: 50px auto;
+    margin: 100px auto;
     box-shadow: 0 10px 25px 10px #0a0a0a1a;
     overflow: hidden;
+}
+.overlay {
+    font-weight: bold;
+	color: #FFFFFF;
+	position: relative;
+	
+	
+  	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
 }
 
 .wrapper .form-left{
@@ -54,6 +63,7 @@ body{
     width: 100%;
     color: #fff;
 }
+
 
 .wrapper h2{
     font-weight: 700;
