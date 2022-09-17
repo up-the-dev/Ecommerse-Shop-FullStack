@@ -57,6 +57,7 @@ const shopController = {
           _id: productId
         }
       })
+      console.log(exist)
       if (exist) {
         return next(CustomErrorHandler.alreadyExist('Product already in cart!'))
       }
