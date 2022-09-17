@@ -57,7 +57,7 @@ const shopController = {
           _id: productId
         }
       })
-      console.log(exist)
+   
       if (exist) {
         return next(CustomErrorHandler.alreadyExist('Product already in cart!'))
       }
@@ -66,6 +66,34 @@ const shopController = {
       const added = await User.updateOne({ _id: req.user._id }, { $push: { cartItems: { _id: productId } } })
 
       if (!added) {
+        return next(CustomErrorHandler.unauthorized())
+      }
+      //redirect to cart page
+      res.redirect('/cart')
+    } catch (err) {
+      return next(err)
+    }
+  },
+  deleteCart: async (req, res, next) => {
+    try {
+      const productId = mongoose.Types.ObjectId(req.params.productId)
+      //checking if product already in cart
+      const userId = req.user._id
+      const exist = await User.findOne({
+        _id: userId,
+        cartItems: {
+          _id: productId
+        }
+      })
+
+      if (!exist) {
+        return next(CustomErrorHandler.notFound('Product not found in cart!'))
+      }
+ 
+      //add productId to cart
+      const deleteItem = await User.updateOne({ _id: userId }, { $pull: { 'cartItems': {_id:productId}} } )
+   
+      if (!deleteItem) {
         return next(CustomErrorHandler.unauthorized())
       }
       //redirect to cart page
