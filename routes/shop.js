@@ -5,7 +5,6 @@ const auth=require('../middlewares/auth')
 const { registrationcontroller, logOutController,shopcontroller,refreshController,logincontroller,profileController } = require('../controllers');
 
 router.post('/auth/registration', registrationcontroller.registration)
-router.get('/auth/registration', registrationcontroller.getRegistration)
 router.post('/auth/login',logincontroller.login)
 //router.post('/auth/logOut',auth,logOutController.logOut)
 router.get('/auth/login',logincontroller.getLogin)
