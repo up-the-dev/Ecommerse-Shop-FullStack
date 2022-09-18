@@ -12,7 +12,8 @@ const shopController = {
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
-        path: '/products'
+        path: '/products',
+        error:false
       });
     } catch (err) {
       return next(err)
@@ -24,7 +25,8 @@ const shopController = {
       res.render('shop/index', {
         prods: products,
         pageTitle: 'Shop',
-        path: '/'
+        path: '/',
+        error:false
       });
     } catch (err) {
       return next(err)
@@ -40,7 +42,8 @@ const shopController = {
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Cart',
-        cartProducts
+        cartProducts,
+        error:false
       });
     } catch (err) {
       return next(err)
@@ -57,9 +60,16 @@ const shopController = {
           _id: productId
         }
       })
-   
+      
       if (exist) {
-        return next(CustomErrorHandler.alreadyExist('Product already in cart!'))
+        const products = await Product.find()
+        res.render('shop/index', {
+          prods: products,
+          pageTitle: 'Shop',
+          path: '/',
+          error:'Product already in cart!'
+        });
+        return 
       }
 
       //add productId to cart
@@ -77,7 +87,7 @@ const shopController = {
   deleteCart: async (req, res, next) => {
     try {
       const productId = mongoose.Types.ObjectId(req.params.productId)
-      //checking if product already in cart
+      //checking if product is in cart
       const userId = req.user._id
       const exist = await User.findOne({
         _id: userId,
@@ -106,7 +116,8 @@ const shopController = {
     try {
       res.render('shop/orders', {
         path: '/orders',
-        pageTitle: 'Your Orders'
+        pageTitle: 'Your Orders',
+        error:false
       });
     } catch (err) {
       return next(err)
@@ -116,7 +127,8 @@ const shopController = {
     try {
       res.render('shop/checkout', {
         path: '/checkout',
-        pageTitle: 'Checkout'
+        pageTitle: 'Checkout',
+        error:false
       });
     } catch (err) {
       return next(err)
@@ -128,7 +140,8 @@ const shopController = {
       res.render('shop/product-detail', {
         path: '/product-detail',
         pageTitle: 'product-details',
-        product
+        product,
+        error:false
       })
     } catch (err) {
       return next(err)

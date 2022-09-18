@@ -3,97 +3,99 @@
 
     <body>
         <%- include('../includes/navigation.ejs') %>
-            <section class="vh-100" style="background-color: #fdfcfb;">
-                <div class="container mt-5">
-                    <%let total=0%>
-                        <% if(cartProducts.length==0){%>
-                            <h1 style="margin-left: 35vw;margin-top: 5vh;">Cart is empty</h1>
-                            <%}else{%>
-                                <div class="row d-flex justify-content-center align-items-center h-50">
-                                    <div class="col">
+            <%- include('../includes/flash-msg.ejs') %>
+                <section class="vh-100" style="background-color: #fdfcfb;">
+                    <div class="container mt-5">
+                        <%let total=0%>
+                            <% if(cartProducts.length==0){%>
+                                <h1 style="margin-left: 35vw;margin-top: 5vh;">Cart is empty</h1>
+                                <%}else{%>
+                                    <div class="row d-flex justify-content-center align-items-center h-50">
+                                        <div class="col">
 
-                                        <%for(let prod of cartProducts){%>
-                                            <div class="card mb-4">
-                                                <div class="card-body p-4">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-md-2">
-                                                            <img src="<%=prod._id.imageUrl%>" width="318px"
-                                                                height="212px" class="img-fluid"
-                                                                alt="Generic placeholder image">
-                                                        </div>
-                                                        <div class="col-md-2 d-flex justify-content-center">
-                                                            <div>
-                                                                <p class="small text-muted mb-4 pb-2">Name</p>
-                                                                <p class="lead fw-normal mb-0">
-                                                                    <%=prod._id.title%>
-                                                                </p>
+                                            <%for(let prod of cartProducts){%>
+                                                <div class="card mb-4">
+                                                    <div class="card-body p-4">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-2">
+                                                                <img src="<%=prod._id.imageUrl%>" width="318px"
+                                                                    height="212px" class="img-fluid"
+                                                                    alt="Generic placeholder image">
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-2 d-flex justify-content-center">
-                                                            <div>
-                                                                <p class="small text-muted mb-4 pb-2">Quantity</p>
-                                                                <p class="lead fw-normal mb-0">
-                                                                    <%=prod.quantity%>
-                                                                </p>
+                                                            <div class="col-md-2 d-flex justify-content-center">
+                                                                <div>
+                                                                    <p class="small text-muted mb-4 pb-2">Name</p>
+                                                                    <p class="lead fw-normal mb-0">
+                                                                        <%=prod._id.title%>
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-2 d-flex justify-content-center">
-                                                            <div>
-                                                                <p class="small text-muted mb-4 pb-2">Price</p>
-                                                                <p class="lead fw-normal mb-0">Rs<%=prod._id.price%>
-                                                                </p>
+                                                            <div class="col-md-2 d-flex justify-content-center">
+                                                                <div>
+                                                                    <p class="small text-muted mb-4 pb-2">Quantity</p>
+                                                                    <p class="lead fw-normal mb-0">
+                                                                        <%=prod.quantity%>
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-2 d-flex justify-content-center">
-                                                            <div>
-                                                                <p class="small text-muted mb-4 pb-2">Total</p>
-                                                                <p class="lead fw-normal mb-0">Rs<%=prod._id.price%>
-                                                                </p>
+                                                            <div class="col-md-2 d-flex justify-content-center">
+                                                                <div>
+                                                                    <p class="small text-muted mb-4 pb-2">Price</p>
+                                                                    <p class="lead fw-normal mb-0">Rs<%=prod._id.price%>
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-2 mt-5 d-flex justify-content-center">
-                                                            <form action="/delete-cart-product/<%= prod._id._id%>" method="post">
-                                                                <button type="submit" >
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="26"
-                                                                        height="26" fill="currentColor"
-                                                                        class="bi bi-trash" viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                                                        <path fill-rule="evenodd"
-                                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                                                    </svg>
-                                                                </button>
-                                                            </form>
+                                                            <div class="col-md-2 d-flex justify-content-center">
+                                                                <div>
+                                                                    <p class="small text-muted mb-4 pb-2">Total</p>
+                                                                    <p class="lead fw-normal mb-0">Rs<%=prod._id.price%>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2 mt-5 d-flex justify-content-center">
+                                                                <form action="/delete-cart-product/<%= prod._id._id%>"
+                                                                    method="post">
+                                                                    <button type="submit">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="26" height="26" fill="currentColor"
+                                                                            class="bi bi-trash" viewBox="0 0 16 16">
+                                                                            <path
+                                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                                        </svg>
+                                                                    </button>
+                                                                </form>
 
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <%total=total+prod._id.price%>
-                                                <%}%>
+                                                <%total=total+prod._id.price%>
                                                     <%}%>
+                                                        <%}%>
 
+                                        </div>
                                     </div>
-                                </div>
-                </div>
+                    </div>
 
-                <div class="card mb-3 mt-5">
-                    <div class="card-body p-3">
-                        <div class="float-end">
-                            <p class="mb-0 me-5 d-flex align-items-center">
-                                <span class="small text-muted me-2">Order
-                                    total:</span> <span class="lead fw-normal">Rs
-                                    <%=total%>
-                                </span>
-                            </p>
+                    <div class="card mb-3 mt-5">
+                        <div class="card-body p-3">
+                            <div class="float-end">
+                                <p class="mb-0 me-5 d-flex align-items-center">
+                                    <span class="small text-muted me-2">Order
+                                        total:</span> <span class="lead fw-normal">Rs
+                                        <%=total%>
+                                    </span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-light btn-lg me-2">Continue
-                        shopping</button>
-                    <button type="button" class="btn btn-primary btn-lg">CheckOut</button>
-                </div>
-            </section>
-            <%- include('../includes/end.ejs') %>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-light btn-lg me-2">Continue
+                            shopping</button>
+                        <button type="button" class="btn btn-primary btn-lg">CheckOut</button>
+                    </div>
+                </section>
+                <%- include('../includes/end.ejs') %>

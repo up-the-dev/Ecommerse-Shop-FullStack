@@ -8,7 +8,9 @@ const productController = {
         path: '/admin/add-product',
         formsCSS: true,
         productCSS: true,
-        activeAddProduct: true
+        activeAddProduct: true,
+        error:false
+
       });
     } catch (err) {
       return next(err)
@@ -18,7 +20,16 @@ const productController = {
     try {
       const { error } = await productSchema.validate(req.body)
       if (error) {
-        return next(error)
+        res.render('admin/add-product', {
+          pageTitle: 'Add Product',
+          path: '/admin/add-product',
+          formsCSS: true,
+          productCSS: true,
+          activeAddProduct: true,
+          error:error.message
+  
+        })
+        return
       }
       const { title, imageUrl, price, description } = req.body
       const product = new Product({
@@ -37,7 +48,8 @@ const productController = {
       res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
-        path: '/admin/products'
+        path: '/admin/products',
+        error:false
       })
     } catch (err) {
       return next(err)
@@ -50,7 +62,8 @@ const productController = {
       res.render('admin/edit-product', {
         path: '/admin/edit-product',
         pageTitle: 'Edit Products',
-        product
+        product,
+        error:false
       })
     } catch (err) {
       return next(err)
@@ -59,11 +72,19 @@ const productController = {
   updateProduct: async (req, res, next) => {
     try {
       //validation
+      const productId = req.params.productId
       const { error } = await productSchema.validate(req.body)
       if (error) {
-        return next(error)
+        const product = await Product.findOne({ _id: productId })
+        res.render('admin/edit-product', {
+          path: '/admin/edit-product',
+          pageTitle: 'Edit Products',
+          product,
+          error:error.message
+        })
+        return
       }
-      const productId = req.params.productId
+  
       const { title, imageUrl,
         price,
         description } = req.body

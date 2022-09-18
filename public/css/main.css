@@ -214,6 +214,25 @@ form {
   color: white;
 }
 
+/*flash msg*/
+.alert {
+	padding: 20px;
+	margin-top: 3px;
+	margin-bottom: -34px;
+	background-color: #f44336;
+	color: white;
+  }
+  
+  .closebtn {
+	margin-left: 15px;
+  color: black;
+	font-weight: bold;
+	float: right;
+	font-size: 22px;
+	line-height: 20px;
+	cursor: pointer;
+	transition: 0.3s;
+  }
 @media (min-width: 768px) {
   .main-header__nav {
     display: flex;
