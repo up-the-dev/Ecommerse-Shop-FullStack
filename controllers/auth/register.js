@@ -1,30 +1,35 @@
-const Joi = require('joi')
 const User = require('../../models/user')
-const CustomErrorHandler = require('../../services/CustomErrorHandler')
 const bcrypt = require('bcrypt')
 const JwtService = require('../../services/jwt')
 const { REFRESH_SECRET } = require('../../config')
+const { registerSchema } = require('../../validators')
 const register = {
     registration: async (req, res, next) => {
         //request validation
-        const registerSchema = Joi.object({
-            firstName: Joi.string().required(),
-            lastName: Joi.string().required(),
-            email: Joi.string().email().required(),
-            password: Joi.string().pattern(new RegExp('^[a-zA-z0-9#@]{4,128}$')).required(),
-            repeat_password: Joi.ref('password')
-        })
         const { error } = registerSchema.validate(req.body)
         if (error) {
-            return next(error)
-        }
+           // return next(error)
+           res.render('shop/login', {
+            pageTitle: 'login',
+            path: '/auth/login',
+            register:'true',
+            error:error.message
+          });
+          return
+        }else{
         let access_token
         let refresh_token
         try {
             //checking if user already registered
             const exist = await User.findOne({ email: req.body.email })
             if (exist) {
-                return next(CustomErrorHandler.alreadyExist('user already exist'))
+                res.render('shop/login', {
+                    pageTitle: 'login',
+                    path: '/auth/login',
+                    register:'true',
+                    error:'user already exist !'
+                  });
+                  return
             }
             //storing data into db
             //hashing password
@@ -52,6 +57,7 @@ const register = {
             httpOnly: true
         })
         res.redirect('/')
+    }
 
     }
 }

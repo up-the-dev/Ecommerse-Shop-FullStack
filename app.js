@@ -10,7 +10,6 @@ const admin = require('./middlewares/admin')
 const errorHandler = require('./middlewares/errorHandler')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
-const flashMessage = require('connect-flash')
 
 const app = express();
 
