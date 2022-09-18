@@ -33,7 +33,8 @@ const productController = {
       }
       const { title, imageUrl, price, description } = req.body
       const product = new Product({
-        title, imageUrl, description, price
+        title, imageUrl, description, price,
+        admin:req.user._id
       });
       await product.save();
       res.redirect('/');
@@ -44,7 +45,7 @@ const productController = {
   },
   getProducts: async (req, res, next) => {
     try {
-      const products = await Product.find()
+      const products = await Product.find({admin:req.user._id})
       res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
