@@ -89,7 +89,7 @@ const productController = {
       const { title, imageUrl,
         price,
         description } = req.body
-      const result = await Product.updateOne({ _id: productId }, {
+      const result = await Product.updateOne({ _id: productId,admin:req.user._id }, {
         title, imageUrl, price, description
       })
       res.redirect('/admin/products')
@@ -100,7 +100,8 @@ const productController = {
   deleteProduct: async (req, res, next) => {
     try {
       const productId = req.params.productId
-      const result = await Product.findOneAndRemove({ _id: productId })
+      
+      const result = await Product.findOneAndRemove({ _id: productId ,admin:req.user._id})
       res.redirect('/admin/products')
     } catch (error) {
       return next(error)
