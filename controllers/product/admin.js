@@ -1,4 +1,5 @@
 const Product = require('../../models/product');
+const User = require('../../models/user');
 const { productSchema } = require('../../validators');
 const productController = {
   getAddProduct: (req, res, next) => {
@@ -101,7 +102,10 @@ const productController = {
     try {
       const productId = req.params.productId
       
-      const result = await Product.findOneAndRemove({ _id: productId ,admin:req.user._id})
+      await Product.findOneAndRemove({ _id: productId ,admin:req.user._id})
+      await User.updateMany({cartItems: {
+        _id: productId
+      }},{$unset:{cartItems:{_id:productId}}})
       res.redirect('/admin/products')
     } catch (error) {
       return next(error)
