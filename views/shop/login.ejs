@@ -4,49 +4,58 @@
 
   <body>
     <%- include('../includes/navigation.ejs') %>
+   
+     <%if(error){%>
+      <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <%=error%>
+      </div>
+      <%}%>
+        <div class="container " id="container">
+          <div class="form-container sign-up-container">
+            <form action="/auth/registration" method="post">
+              <h1>Create Account</h1>
+              <input type="text" name="firstName" placeholder="FirstName">
+              <input type="text" name="lastName" placeholder="LastName">
+              <input type="email" placeholder="Email" name="email" required>
+              <input type="password" placeholder="Password" name="password">
+              <input type="password" name="repeat_password" placeholder="Repeat Password">
+              <button type="submit">Sign Up</button>
 
-      <div class="container" id="container">
-        <div class="form-container sign-up-container">
-          <form action="/auth/registration" method="post">
-
-            <h1>Create Account</h1>
-            <input type="text" name="firstName" placeholder="FirstName">
-            <input type="text" name="lastName" placeholder="LastName">
-            <input type="email" placeholder="Email" name="email" required>
-            <input type="password" placeholder="Password" name="password">
-            <input type="password" name="repeat_password" placeholder="Repeat Password">
-            <button type="submit">Sign Up</button>
-
-          </form>
-        </div>
-
-
-        <div class="form-container sign-in-container">
-          <form action="/auth/login" method="post">
-            <h1>Sign in</h1>
-            <input type="email" name="email" placeholder="Email" />
-            <input type="password" name="password" placeholder="Password" />
-            <a href="#">Forgot your password?</a>
-            <button type="submit">Sign In</button>
-          </form>
-        </div>
-
-        <div class="overlay-container">
-          <div class="overlay">
-            <div class="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
-              <p>To keep connected with us please login with your personal info</p>
-              <button class="ghost" id="signIn">Sign In</button>
-            </div>
-            <div class="overlay-panel overlay-right">
-              <h1>Hello, Friend!</h1>
-              <p>don’t have an account? </p>
-              <p>Enter your personal details and start journey with us</p>
-              <button class="ghost" id="signUp">Sign Up</button>
+            </form>
+          </div>
+          <div class="form-container sign-in-container">
+            <form action="/auth/login" method="post">
+              <h1>Sign in</h1>
+              <input type="email" name="email" placeholder="Email" />
+              <input type="password" name="password" placeholder="Password" />
+              <a href="#">Forgot your password?</a>
+              <button type="submit">Sign In</button>
+            </form>
+          </div>
+       
+          <div class="overlay-container">
+            <div class="overlay">
+              <div class="overlay-panel overlay-right">
+                <h1>Hello, Friend!</h1>
+                <p>don’t have an account? </p>
+                <p>Enter your personal details and start journey with us</p>
+                <button class="ghost" id="signUp">Sign Up</button>
+              </div>
+              <div class="overlay-panel overlay-left">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" id="signIn">Sign In</button>
+              </div>
+           
             </div>
           </div>
         </div>
-      </div>
-
-      <script src="/js/login.js"></script>
-      <%- include('../includes/end.ejs') %>
+        
+        <%if(register){%>
+          <script>
+               document.getElementById('container').classList.add("right-panel-active");
+          </script>
+          <%}%>
+            <script src="/js/login.js"></script>
+            <%- include('../includes/end.ejs') %>

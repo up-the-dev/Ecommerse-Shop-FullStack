@@ -1,20 +1,21 @@
-const Joi = require("joi")
 const User = require("../../models/user")
 const bcrypt = require('bcrypt')
 const JwtService = require('../../services/jwt')
 const { REFRESH_SECRET } = require('../../config')
-const CustomErrorHandler = require("../../services/CustomErrorHandler")
+const { loginSchema } = require("../../validators")
 
 const logincontroller = {
     login: async (req, res, next) => {
         //request validation
-        const loginSchema = Joi.object({
-            email: Joi.string().email().required(),
-            password: Joi.string().pattern(new RegExp('^[a-zA-z0-9#@]{4,128}$')).required()
-        })
         const { error } = loginSchema.validate(req.body)
         if (error) {
-            return next(error)
+            res.render('shop/login', {
+                pageTitle: 'login',
+                path: '/auth/login',
+                register:false,
+                error:error.message
+              });
+              return
         }
         //checking if user exist
         let access_token
@@ -22,12 +23,24 @@ const logincontroller = {
         try {
             const user = await User.findOne({ email: req.body.email })
             if (!user) {
-                return next(CustomErrorHandler.unauthorized('user not exist.please register first !'))
+                res.render('shop/login', {
+                    pageTitle: 'login',
+                    path: '/auth/login',
+                    register:false,
+                    error:'user not exist.please register first !'
+                  });
+                  return
             }
             //password varification
             const match = await bcrypt.compare(req.body.password, user.password)
             if (!match) {
-                return next(CustomErrorHandler.unauthorized('Wrong Password !'))
+                res.render('shop/login', {
+                    pageTitle: 'login',
+                    path: '/auth/login',
+                    register:false,
+                    error:'Wrong Password !'
+                  });
+                  return
             }
             access_token = await JwtService.sign({ _id: user._id, role: user.role })
             refresh_token = await JwtService.sign({ _id: user._id, role: user.role }, REFRESH_SECRET, '7d')
@@ -48,7 +61,9 @@ const logincontroller = {
     getLogin: (req, res, next) => {
         res.render('shop/login', {
             pageTitle: 'login',
-            path: '/auth/login'
+            path: '/auth/login',
+            register:false,
+            error:false
         })
     }
 }
