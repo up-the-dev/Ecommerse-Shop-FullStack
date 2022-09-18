@@ -33,7 +33,8 @@ const productController = {
       }
       const { title, imageUrl, price, description } = req.body
       const product = new Product({
-        title, imageUrl, description, price
+        title, imageUrl, description, price,
+        admin:req.user._id
       });
       await product.save();
       res.redirect('/');
@@ -44,7 +45,7 @@ const productController = {
   },
   getProducts: async (req, res, next) => {
     try {
-      const products = await Product.find()
+      const products = await Product.find({admin:req.user._id})
       res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
@@ -88,7 +89,7 @@ const productController = {
       const { title, imageUrl,
         price,
         description } = req.body
-      const result = await Product.updateOne({ _id: productId }, {
+      const result = await Product.updateOne({ _id: productId,admin:req.user._id }, {
         title, imageUrl, price, description
       })
       res.redirect('/admin/products')
@@ -99,7 +100,8 @@ const productController = {
   deleteProduct: async (req, res, next) => {
     try {
       const productId = req.params.productId
-      const result = await Product.findOneAndRemove({ _id: productId })
+      
+      const result = await Product.findOneAndRemove({ _id: productId ,admin:req.user._id})
       res.redirect('/admin/products')
     } catch (error) {
       return next(error)
