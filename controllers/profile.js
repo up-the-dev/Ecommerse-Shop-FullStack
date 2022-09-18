@@ -13,7 +13,8 @@ const profileController = {
             res.render('shop/profile', {
                 path: '/profile',
                 pageTitle: 'profile',
-                user
+                user,
+                error:false
             })
         } catch (error) {
             return next(error)
@@ -29,7 +30,8 @@ const profileController = {
             res.render('shop/edit-profile', {
                 path: '/edit-profile',
                 pageTitle: 'edit profile',
-                user
+                user,
+                error:false
             })
         } catch (error) {
             return next(error)
@@ -42,7 +44,14 @@ const profileController = {
     
             const { error } = await editProfileSchema.validate(req.body)
             if (error) {
-                return next(error)
+                const user = await User.findOne({ _id: req.user._id }).select('-password -cartItems -refreshToken -__v ')
+                res.render('shop/edit-profile', {
+                    path: '/edit-profile',
+                    pageTitle: 'edit profile',
+                    user,
+                    error:error.message
+                })
+                  return
             }
           
             const userId = req.user._id

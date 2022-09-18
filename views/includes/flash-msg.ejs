@@ -1,0 +1,17 @@
+<%if(error){%>
+    <div style="	padding: 12px;
+    margin-top: 3px;
+    margin-bottom: -25px;
+    background-color: #f44336;
+    color: white;">
+      <span style="margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;" onclick="this.parentElement.style.display='none';">&times;</span> 
+      <%=error%>
+    </div>
+    <%}%>

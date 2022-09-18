@@ -4,14 +4,8 @@
 
   <body>
     <%- include('../includes/navigation.ejs') %>
-   
-     <%if(error){%>
-      <div class="alert">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        <%=error%>
-      </div>
-      <%}%>
-        <div class="container " id="container">
+    <%- include('../includes/flash-msg.ejs') %>
+      <div class="container " id="container">
           <div class="form-container sign-up-container">
             <form action="/auth/registration" method="post">
               <h1>Create Account</h1>
