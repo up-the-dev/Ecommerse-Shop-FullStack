@@ -1,2 +1,2 @@
-# Dynamic-Content-ejs
- displaying dynamic content by using ejs templete engine in Node.js
+# Ecommerse-Shop-FullStack
+ complete Ecommerse application created with MERN
