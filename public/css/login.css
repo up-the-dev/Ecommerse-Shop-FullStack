@@ -57,7 +57,10 @@ button {
 	transition: transform 80ms ease-in;
 }
 
-button:active {
+button:active,
+button:hover {
+	background-color:  white;
+	color:  rgb(55, 52, 52);
 	transform: scale(0.95);
 }
 
