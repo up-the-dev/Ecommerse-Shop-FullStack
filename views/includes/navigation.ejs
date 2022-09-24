@@ -39,9 +39,6 @@
                     <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
                 </li>
                 <li class="mobile-nav__item">
-                    <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
-                </li>
-                <li class="mobile-nav__item">
                     <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
                 </li>
                 <li class="mobile-nav__item">
@@ -54,6 +51,12 @@
                 <li class="mobile-nav__item">
                     <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
                     </a>
+                </li>
+                <li class="mobile-nav__item">
+                    <a class="<%= path === '/auth/profile' ? 'active' : '' %>" href="/profile">Profile</a>
+                </li>
+                <li class="mobile-nav__item">
+                    <a class="<%= path === '/auth/login' ? 'active' : '' %>" href="/auth/login">Register / Log In </a>
                 </li>
             </ul>
 </nav>

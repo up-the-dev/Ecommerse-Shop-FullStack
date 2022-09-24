@@ -13,7 +13,7 @@ const logincontroller = {
                 pageTitle: 'login',
                 path: '/auth/login',
                 register:false,
-                error:error.message
+                msg:error.message
               });
               return
         }
@@ -27,7 +27,7 @@ const logincontroller = {
                     pageTitle: 'login',
                     path: '/auth/login',
                     register:false,
-                    error:'user not exist.please register first !'
+                    msg:'user not exist.please register first !'
                   });
                   return
             }
@@ -38,7 +38,7 @@ const logincontroller = {
                     pageTitle: 'login',
                     path: '/auth/login',
                     register:false,
-                    error:'Wrong Password !'
+                    msg:'Wrong Password !'
                   });
                   return
             }
@@ -63,7 +63,7 @@ const logincontroller = {
             pageTitle: 'login',
             path: '/auth/login',
             register:false,
-            error:false
+            msg:false
         })
     }
 }

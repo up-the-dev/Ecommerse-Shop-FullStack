@@ -10,7 +10,7 @@ const admin = require('./middlewares/admin')
 const errorHandler = require('./middlewares/errorHandler')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
-
+const flash=require('connect-flash')
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -21,11 +21,13 @@ app.use(cookieParser())
 app.use(expressSession({
     secret: SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie:{
         httpOnly:true
     }
 }))
+app.use(flash())
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', auth, admin, adminRoutes);

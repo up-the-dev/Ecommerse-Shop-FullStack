@@ -14,7 +14,7 @@ const profileController = {
                 path: '/profile',
                 pageTitle: 'profile',
                 user,
-                error:false
+                msg:false
             })
         } catch (error) {
             return next(error)
@@ -31,7 +31,7 @@ const profileController = {
                 path: '/edit-profile',
                 pageTitle: 'edit profile',
                 user,
-                error:false
+                msg:false
             })
         } catch (error) {
             return next(error)
@@ -49,7 +49,7 @@ const profileController = {
                     path: '/edit-profile',
                     pageTitle: 'edit profile',
                     user,
-                    error:error.message
+                    msg:error.message
                 })
                   return
             }

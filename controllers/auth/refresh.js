@@ -10,6 +10,7 @@ const refreshController = {
         try {
             const exist = await User.findOne({ "refreshToken.token": token })
             if (!exist) {
+                //add logOut logic
                 return next(CustomErrorHandler.unauthorized('token not found'))
             }
         } catch (err) {

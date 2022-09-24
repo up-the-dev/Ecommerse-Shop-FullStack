@@ -13,7 +13,7 @@ const register = {
             pageTitle: 'login',
             path: '/auth/login',
             register:'true',
-            error:error.message
+            msg:error.message
           });
           return
         }else{
@@ -27,7 +27,7 @@ const register = {
                     pageTitle: 'login',
                     path: '/auth/login',
                     register:'true',
-                    error:'user already exist !'
+                    msg:'user already exist !'
                   });
                   return
             }
@@ -51,7 +51,8 @@ const register = {
             return next(err)
         }
         res.cookie('access_token', access_token, {
-            httpOnly: true
+            httpOnly: true,
+            expires:  new Date(Date.now() + 1000*60*60*24),
         })
         res.cookie('refresh_token', refresh_token, {
             httpOnly: true

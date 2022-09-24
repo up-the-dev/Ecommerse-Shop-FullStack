@@ -10,7 +10,7 @@ const productController = {
         formsCSS: true,
         productCSS: true,
         activeAddProduct: true,
-        error:false
+        msg:false
 
       });
     } catch (err) {
@@ -27,7 +27,7 @@ const productController = {
           formsCSS: true,
           productCSS: true,
           activeAddProduct: true,
-          error:error.message
+          msg:error.message
   
         })
         return
@@ -51,7 +51,7 @@ const productController = {
         prods: products,
         pageTitle: 'Admin Products',
         path: '/admin/products',
-        error:false
+        msg:false
       })
     } catch (err) {
       return next(err)
@@ -65,7 +65,7 @@ const productController = {
         path: '/admin/edit-product',
         pageTitle: 'Edit Products',
         product,
-        error:false
+        msg:false
       })
     } catch (err) {
       return next(err)
@@ -82,7 +82,7 @@ const productController = {
           path: '/admin/edit-product',
           pageTitle: 'Edit Products',
           product,
-          error:error.message
+          msg:error.message
         })
         return
       }
