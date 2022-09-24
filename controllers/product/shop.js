@@ -13,7 +13,7 @@ const shopController = {
         prods: products,
         pageTitle: 'All Products',
         path: '/products',
-        error:false
+        msg:false
       });
     } catch (err) {
       return next(err)
@@ -26,7 +26,7 @@ const shopController = {
         prods: products,
         pageTitle: 'Shop',
         path: '/',
-        error:false
+        msg:false
       });
     } catch (err) {
       return next(err)
@@ -43,7 +43,7 @@ const shopController = {
         path: '/cart',
         pageTitle: 'Cart',
         cartProducts,
-        error:false
+        msg:false
       });
     } catch (err) {
       return next(err)
@@ -67,7 +67,7 @@ const shopController = {
           prods: products,
           pageTitle: 'Shop',
           path: '/',
-          error:'Product already in cart!'
+          msg:'Product already in cart!'
         });
         return 
       }
@@ -79,7 +79,7 @@ const shopController = {
         return next(CustomErrorHandler.unauthorized())
       }
       //redirect to cart page
-      res.redirect('/cart')
+      res.redirect('back')
     } catch (err) {
       return next(err)
     }
@@ -117,7 +117,7 @@ const shopController = {
       res.render('shop/orders', {
         path: '/orders',
         pageTitle: 'Your Orders',
-        error:false
+        msg:false
       });
     } catch (err) {
       return next(err)
@@ -128,7 +128,7 @@ const shopController = {
       res.render('shop/checkout', {
         path: '/checkout',
         pageTitle: 'Checkout',
-        error:false
+        msg:false
       });
     } catch (err) {
       return next(err)
@@ -141,7 +141,7 @@ const shopController = {
         path: '/product-detail',
         pageTitle: 'product-details',
         product,
-        error:false
+        msg:false
       })
     } catch (err) {
       return next(err)

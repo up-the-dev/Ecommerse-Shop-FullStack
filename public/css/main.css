@@ -9,11 +9,11 @@ body {
   padding: 0;
   margin: 0;
   background: #f6f5f7;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
 
 
 }
@@ -185,15 +185,15 @@ button,
 .card__actions a {
   margin: 0 0.25rem;
   border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color:#FFFFFF ;
-	color:  #FF4B2B;
-	font-size: 12px;
-	font-weight: bold;
-	padding: 10px 18px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	transition: transform 80ms ease-in;
+  border: 1px solid #FF4B2B;
+  background-color: #FFFFFF;
+  color: #FF4B2B;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
 }
 
 
@@ -201,30 +201,37 @@ button,
 .card__actions button:hover,
 .card__actions a:hover,
 #btn:active {
-  background-color:  #FF4B2B;
+  background-color: #FF4B2B;
   color: white;
   transform: scale(0.95);
 }
 
 /*flash msg*/
-.alert {
-	padding: 20px;
-	margin-top: 3px;
-	margin-bottom: -34px;
-	background-color: #f44336;
-	color: white;
-  }
+#alert {
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #f44336;
+  color: white;
+  z-index: 1;
+  overflow: hidden;
+  position: sticky;
+  top: 61px;
+  right: 10px;
   
-  .closebtn {
-	margin-left: 15px;
+ 
+}
+
+.closebtn {
+  margin-left: 15px;
   color: black;
-	font-weight: bold;
-	float: right;
-	font-size: 22px;
-	line-height: 20px;
-	cursor: pointer;
-	transition: 0.3s;
-  }
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 @media (min-width: 768px) {
   .main-header__nav {
     display: flex;
