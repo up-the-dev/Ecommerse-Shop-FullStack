@@ -105,7 +105,8 @@ const productController = {
       await Product.findOneAndRemove({ _id: productId ,admin:req.user._id})
       await User.updateMany({cartItems: {
         _id: productId
-      }},{$unset:{cartItems:{_id:productId}}})
+      }}, { $pull: { cartItems: { _id: productId } } })
+      
       res.redirect('/admin/products')
     } catch (error) {
       return next(error)
