@@ -20,13 +20,17 @@ app.use(express.json());
 app.use(cookieParser())
 app.use(expressSession({
     secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     cookie:{
         httpOnly:true
     }
 }))
 app.use(flash())
+app.use(function(req, res, next){
+    res.locals.messages = req.flash();
+    next();
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 

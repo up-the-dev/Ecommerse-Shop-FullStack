@@ -208,21 +208,23 @@ button,
 
 /*flash msg*/
 #alert {
-  padding: 12px;
+  padding: 4px;
+  margin-bottom: -10px;
   border-radius: 10px;
   background-color: #f44336;
   color: white;
   z-index: 1;
   overflow: hidden;
   position: sticky;
-  top: 61px;
-  right: 10px;
-  
+top: 10px;
+left: 10px;
+  width: 50vh;
+  text-align: center;
  
 }
 
 .closebtn {
-  margin-left: 15px;
+  margin-left: 20px;
   color: black;
   font-weight: bold;
   float: right;

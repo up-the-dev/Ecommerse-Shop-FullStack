@@ -12,8 +12,7 @@ const shopController = {
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
-        path: '/products',
-        msg:false
+        path: '/products'
       });
     } catch (err) {
       return next(err)
@@ -25,8 +24,7 @@ const shopController = {
       res.render('shop/index', {
         prods: products,
         pageTitle: 'Shop',
-        path: '/',
-        msg:false
+        path: '/'
       });
     } catch (err) {
       return next(err)
@@ -42,8 +40,7 @@ const shopController = {
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Cart',
-        cartProducts,
-        msg:false
+        cartProducts
       });
     } catch (err) {
       return next(err)
@@ -62,13 +59,8 @@ const shopController = {
       })
       
       if (exist) {
-        const products = await Product.find()
-        res.render('shop/index', {
-          prods: products,
-          pageTitle: 'Shop',
-          path: '/',
-          msg:'Product already in cart!'
-        });
+        req.flash('error', 'Product already in cart!')
+        res.redirect('/');
         return 
       }
 
@@ -79,6 +71,7 @@ const shopController = {
         return next(CustomErrorHandler.unauthorized())
       }
       //redirect to cart page
+      req.flash('error', 'Product added to cart!')
       res.redirect('back')
     } catch (err) {
       return next(err)
@@ -107,6 +100,7 @@ const shopController = {
         return next(CustomErrorHandler.unauthorized())
       }
       //redirect to cart page
+      
       res.redirect('/cart')
     } catch (err) {
       return next(err)
@@ -116,8 +110,7 @@ const shopController = {
     try {
       res.render('shop/orders', {
         path: '/orders',
-        pageTitle: 'Your Orders',
-        msg:false
+        pageTitle: 'Your Orders'
       });
     } catch (err) {
       return next(err)
@@ -127,8 +120,7 @@ const shopController = {
     try {
       res.render('shop/checkout', {
         path: '/checkout',
-        pageTitle: 'Checkout',
-        msg:false
+        pageTitle: 'Checkout'
       });
     } catch (err) {
       return next(err)
@@ -140,8 +132,7 @@ const shopController = {
       res.render('shop/product-detail', {
         path: '/product-detail',
         pageTitle: 'product-details',
-        product,
-        msg:false
+        product
       })
     } catch (err) {
       return next(err)

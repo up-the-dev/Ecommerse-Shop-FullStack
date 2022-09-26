@@ -28,7 +28,7 @@ module.exports = {
   }),
 loginSchema : Joi.object({
       email: Joi.string().email().required(),
-      password: Joi.string().pattern(new RegExp('^[a-zA-z0-9#@]{4,128}$')).required()
+      password: Joi.string().pattern(new RegExp('^[a-zA-z0-9#@]{4,128}$')).required().messages({'invalid password':'please enter valid password'})
   })
 
 }
