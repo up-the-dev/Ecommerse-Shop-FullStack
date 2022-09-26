@@ -4,9 +4,10 @@
 
   <body>
     <%- include('../includes/navigation.ejs') %>
-    <%- include('../includes/flash-msg.ejs') %>
+    
       <div class="container " id="container">
           <div class="form-container sign-up-container">
+            <%- include('../includes/flash-msg.ejs') %>
             <form action="/auth/registration" method="post">
               <h1>Create Account</h1>
               <input type="text" name="firstName" placeholder="FirstName">
@@ -19,6 +20,7 @@
             </form>
           </div>
           <div class="form-container sign-in-container">
+            <%- include('../includes/flash-msg.ejs') %>
             <form action="/auth/login" method="post">
               <h1>Sign in</h1>
               <input type="email" name="email" placeholder="Email" />
@@ -51,7 +53,7 @@
           &copy;2020 umesh pawar. All right reserved.
         </p>
         
-        <%if(register){%>
+        <%if(register||messages.register=='true'){%>
           <script>
                document.getElementById('container').classList.add("right-panel-active");
           </script>

@@ -1,6 +1,7 @@
-<%if(msg){%>
+<%if(messages.error){%>
+  
   <div id="alert">
-    <%=msg%>
+    <%=messages.error%>
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   </div>
   <%}%>

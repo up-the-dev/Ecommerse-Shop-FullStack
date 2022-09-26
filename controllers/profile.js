@@ -13,8 +13,7 @@ const profileController = {
             res.render('shop/profile', {
                 path: '/profile',
                 pageTitle: 'profile',
-                user,
-                msg:false
+                user
             })
         } catch (error) {
             return next(error)
@@ -30,8 +29,7 @@ const profileController = {
             res.render('shop/edit-profile', {
                 path: '/edit-profile',
                 pageTitle: 'edit profile',
-                user,
-                msg:false
+                user
             })
         } catch (error) {
             return next(error)
@@ -41,26 +39,23 @@ const profileController = {
     editProfile: async (req, res, next) => {
         try {
             //validation
-    
+
             const { error } = await editProfileSchema.validate(req.body)
             if (error) {
-                const user = await User.findOne({ _id: req.user._id }).select('-password -cartItems -refreshToken -__v ')
-                res.render('shop/edit-profile', {
-                    path: '/edit-profile',
-                    pageTitle: 'edit profile',
-                    user,
-                    msg:error.message
-                })
-                  return
+                req.flash('error', `${error.message}`),
+                res.redirect('edit-profile');
+                return
+
             }
-          
+
             const userId = req.user._id
-            const { firstName, lastName, phone, email, imgUrl, addressLine1, city,  pincode,state,country } = req.body
+            const { firstName, lastName, phone, email, imgUrl, addressLine1, city, pincode, state, country } = req.body
             const result = await User.updateOne({ _id: userId }, {
                 firstName, lastName, phone, email, imgUrl,
-                address: { addressLine1, city, pincode, state,country }
+                address: { addressLine1, city, pincode, state, country }
 
             })
+            
             res.redirect('/profile')
         } catch (error) {
             return next(err)

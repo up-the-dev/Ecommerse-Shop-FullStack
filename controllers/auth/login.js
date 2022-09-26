@@ -7,15 +7,12 @@ const { loginSchema } = require("../../validators")
 const logincontroller = {
     login: async (req, res, next) => {
         //request validation
-        const { error } = loginSchema.validate(req.body)
+        req.flash('register', 'false')
+        const { error } = loginSchema.validate(req.body)    
         if (error) {
-            res.render('shop/login', {
-                pageTitle: 'login',
-                path: '/auth/login',
-                register:false,
-                msg:error.message
-              });
-              return
+            req.flash('error', `${error.message}`)
+            res.redirect('login');
+            return
         }
         //checking if user exist
         let access_token
@@ -23,24 +20,16 @@ const logincontroller = {
         try {
             const user = await User.findOne({ email: req.body.email })
             if (!user) {
-                res.render('shop/login', {
-                    pageTitle: 'login',
-                    path: '/auth/login',
-                    register:false,
-                    msg:'user not exist.please register first !'
-                  });
-                  return
+                req.flash('error', 'user not exist . please register first !'),
+                res.redirect('login');
+                return
             }
             //password varification
             const match = await bcrypt.compare(req.body.password, user.password)
             if (!match) {
-                res.render('shop/login', {
-                    pageTitle: 'login',
-                    path: '/auth/login',
-                    register:false,
-                    msg:'Wrong Password !'
-                  });
-                  return
+                req.flash('error',  'Wrong Password !'),
+                res.redirect('login');
+                return
             }
             access_token = await JwtService.sign({ _id: user._id, role: user.role })
             refresh_token = await JwtService.sign({ _id: user._id, role: user.role }, REFRESH_SECRET, '7d')
@@ -62,8 +51,7 @@ const logincontroller = {
         res.render('shop/login', {
             pageTitle: 'login',
             path: '/auth/login',
-            register:false,
-            msg:false
+            register: false
         })
     }
 }

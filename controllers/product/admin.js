@@ -9,9 +9,7 @@ const productController = {
         path: '/admin/add-product',
         formsCSS: true,
         productCSS: true,
-        activeAddProduct: true,
-        msg:false
-
+        activeAddProduct: true
       });
     } catch (err) {
       return next(err)
@@ -21,15 +19,9 @@ const productController = {
     try {
       const { error } = await productSchema.validate(req.body)
       if (error) {
-        res.render('admin/add-product', {
-          pageTitle: 'Add Product',
-          path: '/admin/add-product',
-          formsCSS: true,
-          productCSS: true,
-          activeAddProduct: true,
-          msg:error.message
-  
-        })
+        
+        req.flash('error', `${error.message}`),
+        res.redirect('add-product');
         return
       }
       const { title, imageUrl, price, description } = req.body
@@ -50,8 +42,7 @@ const productController = {
       res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
-        path: '/admin/products',
-        msg:false
+        path: '/admin/products'
       })
     } catch (err) {
       return next(err)
@@ -64,8 +55,7 @@ const productController = {
       res.render('admin/edit-product', {
         path: '/admin/edit-product',
         pageTitle: 'Edit Products',
-        product,
-        msg:false
+        product
       })
     } catch (err) {
       return next(err)
@@ -77,13 +67,8 @@ const productController = {
       const productId = req.params.productId
       const { error } = await productSchema.validate(req.body)
       if (error) {
-        const product = await Product.findOne({ _id: productId })
-        res.render('admin/edit-product', {
-          path: '/admin/edit-product',
-          pageTitle: 'Edit Products',
-          product,
-          msg:error.message
-        })
+        req.flash('error', `${error.message}`)
+        res.redirect(`${productId}`);
         return
       }
   
