@@ -9,7 +9,7 @@ const shopController = {
   getProducts: async (req, res, next) => {
     try {
       const products = await Product.find()
-      res.render('shop/product-list', {
+      return res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
         path: '/products'
@@ -21,7 +21,7 @@ const shopController = {
   getIndex: async (req, res, next) => {
     try {
       const products = await Product.find()
-      res.render('shop/index', {
+      return res.render('shop/index', {
         prods: products,
         pageTitle: 'Shop',
         path: '/'
@@ -37,7 +37,7 @@ const shopController = {
         return next(CustomErrorHandler.unauthorized())
       }
       const cartProducts = user.cartItems
-      res.render('shop/cart', {
+      return res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Cart',
         cartProducts
@@ -60,8 +60,7 @@ const shopController = {
       
       if (exist) {
         req.flash('error', 'Product already in cart!')
-        res.redirect('/');
-        return 
+        return res.redirect('/');
       }
 
       //add productId to cart
@@ -72,7 +71,7 @@ const shopController = {
       }
       //redirect to cart page
       req.flash('error', 'Product added to cart!')
-      res.redirect('back')
+      return res.redirect('back')
     } catch (err) {
       return next(err)
     }
@@ -101,14 +100,14 @@ const shopController = {
       }
       //redirect to cart page
       
-      res.redirect('/cart')
+      return res.redirect('/cart')
     } catch (err) {
       return next(err)
     }
   },
   getOrders: (req, res, next) => {
     try {
-      res.render('shop/orders', {
+      return res.render('shop/orders', {
         path: '/orders',
         pageTitle: 'Your Orders'
       });
@@ -118,7 +117,7 @@ const shopController = {
   },
   getCheckout: (req, res, next) => {
     try {
-      res.render('shop/checkout', {
+      return res.render('shop/checkout', {
         path: '/checkout',
         pageTitle: 'Checkout'
       });
@@ -129,7 +128,7 @@ const shopController = {
   getProductDetails: async (req, res, next) => {
     try {
       const product = await Product.findOne({ _id: req.params.productId })
-      res.render('shop/product-detail', {
+      return res.render('shop/product-detail', {
         path: '/product-detail',
         pageTitle: 'product-details',
         product

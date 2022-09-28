@@ -1,7 +1,7 @@
 {
   "name": "Ecommerse-Shop-FullStack",
   "version": "1.0.0",
-  "description": "complete Ecommerse application created with MERN",
+  "description": "complete Ecommerse application created with Node.js,Express.js,EJS",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",

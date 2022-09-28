@@ -6,7 +6,7 @@
             <li class="main-header__item">
                 <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
             </li>
-            
+
             <li class="main-header__item">
                 <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
             </li>
@@ -31,32 +31,35 @@
             </li>
         </ul>
     </nav>
+    <form style="background-color:transparent;" action="/auth/login" method="get">
+        <button id="btn" onclick="logOut()" style="background-color: orangered; color: white;">logOut</button>
+    </form>
 </header>
 
 <nav class="mobile-nav">
-        <ul class="mobile-nav__item-list">
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
-                    </a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
-                    </a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/auth/profile' ? 'active' : '' %>" href="/profile">Profile</a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/auth/login' ? 'active' : '' %>" href="/auth/login">Register / Log In </a>
-                </li>
-            </ul>
+    <ul class="mobile-nav__item-list">
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
+            </a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
+            </a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/auth/profile' ? 'active' : '' %>" href="/profile">Profile</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/auth/login' ? 'active' : '' %>" href="/auth/login">Register / Log In </a>
+        </li>
+    </ul>
 </nav>

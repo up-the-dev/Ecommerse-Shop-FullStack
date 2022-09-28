@@ -24,7 +24,7 @@ const auth = async (req, res, next) => {
         next()
     } else {
         console.log('token not found !')
-        res.redirect('/auth/login')
+        return res.redirect('/auth/login')
     }
 }
 module.exports = auth
