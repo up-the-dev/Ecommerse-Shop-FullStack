@@ -11,8 +11,8 @@ const register = {
         if (error) {
             // return next(error)
             req.flash('error', `${error.message}`)
-            res.redirect('login');
-            return
+            return res.redirect('login');
+            
         } else {
             let access_token
             let refresh_token
@@ -20,9 +20,9 @@ const register = {
                 //checking if user already registered
                 const exist = await User.findOne({ email: req.body.email })
                 if (exist) {
-                    req.flash('error', 'user already exist !'),
-                    res.redirect('login');
-                    return
+                    req.flash('error', 'user already exist !')
+                    return res.redirect('login');
+                    
                 }
                 //storing data into db
                 //hashing password
@@ -50,7 +50,7 @@ const register = {
             res.cookie('refresh_token', refresh_token, {
                 httpOnly: true
             })
-            res.redirect('/')
+           return res.redirect('/')
         }
 
     }

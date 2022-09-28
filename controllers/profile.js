@@ -10,7 +10,7 @@ const profileController = {
             if (!user) {
                 return next(CustomErrorHandler.unauthorized('user not found'))
             }
-            res.render('shop/profile', {
+            return res.render('shop/profile', {
                 path: '/profile',
                 pageTitle: 'profile',
                 user
@@ -26,7 +26,7 @@ const profileController = {
             if (!user) {
                 return next(CustomErrorHandler.unauthorized('user not found'))
             }
-            res.render('shop/edit-profile', {
+            return res.render('shop/edit-profile', {
                 path: '/edit-profile',
                 pageTitle: 'edit profile',
                 user
@@ -42,9 +42,9 @@ const profileController = {
 
             const { error } = await editProfileSchema.validate(req.body)
             if (error) {
-                req.flash('error', `${error.message}`),
-                res.redirect('edit-profile');
-                return
+                req.flash('error', `${error.message}`)
+                return res.redirect('edit-profile');
+               
 
             }
 
@@ -56,7 +56,7 @@ const profileController = {
 
             })
             
-            res.redirect('/profile')
+            return res.redirect('/profile')
         } catch (error) {
             return next(err)
         }

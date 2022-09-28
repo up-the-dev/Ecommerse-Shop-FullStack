@@ -10,9 +10,9 @@ const logincontroller = {
         req.flash('register', 'false')
         const { error } = loginSchema.validate(req.body)    
         if (error) {
-            req.flash('error', `${error.message}`)
-            res.redirect('login');
-            return
+            req.flash('error', `wrong username or password`)
+            return res.redirect('login');
+           
         }
         //checking if user exist
         let access_token
@@ -20,16 +20,17 @@ const logincontroller = {
         try {
             const user = await User.findOne({ email: req.body.email })
             if (!user) {
-                req.flash('error', 'user not exist . please register first !'),
-                res.redirect('login');
-                return
+                req.flash('error', 'user not exist . please register first !')
+                return res.redirect('login');
+               
             }
             //password varification
             const match = await bcrypt.compare(req.body.password, user.password)
             if (!match) {
-                req.flash('error',  'Wrong Password !'),
-                res.redirect('login');
-                return
+                req.flash('error',  'Wrong Password !')
+                return res.redirect('login');
+               
+                
             }
             access_token = await JwtService.sign({ _id: user._id, role: user.role })
             refresh_token = await JwtService.sign({ _id: user._id, role: user.role }, REFRESH_SECRET, '7d')
@@ -44,11 +45,11 @@ const logincontroller = {
         res.cookie('refresh_token', refresh_token, {
             httpOnly: true
         })
-        res.redirect('/')
+        return res.redirect('/')
 
     },
     getLogin: (req, res, next) => {
-        res.render('shop/login', {
+        return res.render('shop/login', {
             pageTitle: 'login',
             path: '/auth/login',
             register: false

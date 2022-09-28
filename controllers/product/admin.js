@@ -4,7 +4,7 @@ const { productSchema } = require('../../validators');
 const productController = {
   getAddProduct: (req, res, next) => {
     try {
-      res.render('admin/add-product', {
+      return res.render('admin/add-product', {
         pageTitle: 'Add Product',
         path: '/admin/add-product',
         formsCSS: true,
@@ -20,9 +20,9 @@ const productController = {
       const { error } = await productSchema.validate(req.body)
       if (error) {
         
-        req.flash('error', `${error.message}`),
-        res.redirect('add-product');
-        return
+        req.flash('error', `${error.message}`)
+        return res.redirect('add-product');
+        
       }
       const { title, imageUrl, price, description } = req.body
       const product = new Product({
@@ -30,7 +30,7 @@ const productController = {
         admin:req.user._id
       });
       await product.save();
-      res.redirect('/');
+      return res.redirect('/');
     } catch (err) {
       return next(err)
     }
@@ -39,7 +39,7 @@ const productController = {
   getProducts: async (req, res, next) => {
     try {
       const products = await Product.find({admin:req.user._id})
-      res.render('admin/products', {
+      return res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
         path: '/admin/products'
@@ -52,7 +52,7 @@ const productController = {
     try {
       const productId = req.params.productId
       const product = await Product.findOne({ _id: productId })
-      res.render('admin/edit-product', {
+      return res.render('admin/edit-product', {
         path: '/admin/edit-product',
         pageTitle: 'Edit Products',
         product
@@ -68,8 +68,8 @@ const productController = {
       const { error } = await productSchema.validate(req.body)
       if (error) {
         req.flash('error', `${error.message}`)
-        res.redirect(`${productId}`);
-        return
+        return res.redirect(`${productId}`);
+       
       }
   
       const { title, imageUrl,
@@ -78,7 +78,7 @@ const productController = {
       const result = await Product.updateOne({ _id: productId,admin:req.user._id }, {
         title, imageUrl, price, description
       })
-      res.redirect('/admin/products')
+      return res.redirect('/admin/products')
     } catch (error) {
       return next(err)
     }
@@ -92,7 +92,7 @@ const productController = {
         _id: productId
       }}, { $pull: { cartItems: { _id: productId } } })
       
-      res.redirect('/admin/products')
+      return res.redirect('/admin/products')
     } catch (error) {
       return next(error)
     }

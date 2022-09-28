@@ -34,6 +34,7 @@ form {
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .main-header__nav {
@@ -186,7 +187,7 @@ button,
   margin: 0 0.25rem;
   border-radius: 20px;
   border: 1px solid #FF4B2B;
-  background-color: #FFFFFF;
+  background-color: transparent;
   color: #FF4B2B;
   font-size: 12px;
   font-weight: bold;
@@ -216,11 +217,11 @@ button,
   z-index: 1;
   overflow: hidden;
   position: sticky;
-top: 10px;
-left: 10px;
+  top: 10px;
+  left: 10px;
   width: 50vh;
   text-align: center;
- 
+
 }
 
 .closebtn {
