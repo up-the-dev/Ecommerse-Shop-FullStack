@@ -57,10 +57,10 @@ const shopController = {
           _id: productId
         }
       })
-      
+
       if (exist) {
         req.flash('error', 'Product already in cart!')
-        return res.redirect('/');
+        return res.redirect('/home');
       }
 
       //add productId to cart
@@ -91,15 +91,15 @@ const shopController = {
       if (!exist) {
         return next(CustomErrorHandler.notFound('Product not found in cart!'))
       }
- 
+
       //add productId to cart
-      const deleteItem = await User.updateOne({ _id: userId }, { $pull: { 'cartItems': {_id:productId}} } )
-   
+      const deleteItem = await User.updateOne({ _id: userId }, { $pull: { 'cartItems': { _id: productId } } })
+
       if (!deleteItem) {
         return next(CustomErrorHandler.unauthorized())
       }
       //redirect to cart page
-      
+
       return res.redirect('/cart')
     } catch (err) {
       return next(err)
