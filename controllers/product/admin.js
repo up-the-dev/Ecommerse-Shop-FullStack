@@ -19,18 +19,18 @@ const productController = {
     try {
       const { error } = await productSchema.validate(req.body)
       if (error) {
-        
+
         req.flash('error', `${error.message}`)
         return res.redirect('add-product');
-        
+
       }
       const { title, imageUrl, price, description } = req.body
       const product = new Product({
         title, imageUrl, description, price,
-        admin:req.user._id
+        admin: req.user._id
       });
       await product.save();
-      return res.redirect('/');
+      return res.redirect('/admin/products');
     } catch (err) {
       return next(err)
     }
@@ -38,7 +38,7 @@ const productController = {
   },
   getProducts: async (req, res, next) => {
     try {
-      const products = await Product.find({admin:req.user._id})
+      const products = await Product.find({ admin: req.user._id })
       return res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
@@ -69,13 +69,13 @@ const productController = {
       if (error) {
         req.flash('error', `${error.message}`)
         return res.redirect(`${productId}`);
-       
+
       }
-  
+
       const { title, imageUrl,
         price,
         description } = req.body
-      const result = await Product.updateOne({ _id: productId,admin:req.user._id }, {
+      const result = await Product.updateOne({ _id: productId, admin: req.user._id }, {
         title, imageUrl, price, description
       })
       return res.redirect('/admin/products')
@@ -86,12 +86,14 @@ const productController = {
   deleteProduct: async (req, res, next) => {
     try {
       const productId = req.params.productId
-      
-      await Product.findOneAndRemove({ _id: productId ,admin:req.user._id})
-      await User.updateMany({cartItems: {
-        _id: productId
-      }}, { $pull: { cartItems: { _id: productId } } })
-      
+
+      await Product.findOneAndRemove({ _id: productId, admin: req.user._id })
+      await User.updateMany({
+        cartItems: {
+          _id: productId
+        }
+      }, { $pull: { cartItems: { _id: productId } } })
+
       return res.redirect('/admin/products')
     } catch (error) {
       return next(error)

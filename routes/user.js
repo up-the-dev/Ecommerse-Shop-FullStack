@@ -1,20 +1,18 @@
-const path = require('path');
 const express = require('express');
 const router = express.Router();
-const auth = require('../middlewares/auth')
-const { registrationcontroller, logOutController, shopcontroller, refreshController, logincontroller, profileController } = require('../controllers');
+const { logOutController, registrationcontroller, logincontroller, shopcontroller, refreshController, profileController } = require('../controllers');
+const auth = require('../middlewares/auth');
 
-router.post('/auth/registration', registrationcontroller.registration)
-router.post('/auth/login', logincontroller.login)
+
+router.get('/home', auth, shopcontroller.getIndex);
+router.get('/products', auth, shopcontroller.getProducts);
+router.get('/product/:productId', auth, shopcontroller.getProductDetails)
+
 router.post('/auth/logOut', auth, logOutController.logout)
-router.get('/auth/login', logincontroller.getLogin)
 router.get('/profile', auth, profileController.getProfile)
 router.get('/edit-profile', auth, profileController.geteditProfile)
 router.post('/edit-profile', auth, profileController.editProfile)
-router.post('/auth/refresh', refreshController.refresh)
-router.get('/', shopcontroller.getIndex);
-router.get('/products', shopcontroller.getProducts);
-router.get('/products/:productId', shopcontroller.getProductDetails)
+router.post('/auth/refresh', auth, refreshController.refresh)
 router.get('/cart', auth, shopcontroller.getCart);
 router.post('/cart', auth, shopcontroller.postCart)
 router.post('/delete-cart-product/:productId', auth, shopcontroller.deleteCart)

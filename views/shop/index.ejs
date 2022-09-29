@@ -21,7 +21,7 @@
                                             alt="<%= product.title %>">
                                     </div>
                                     <div class="card__content">
-                                        <h2 class="product__price">₹  <%= product.price %>
+                                        <h2 class="product__price">₹ <%= product.price %>
                                         </h2>
                                         <p class="product__description">
                                             <%= product.description %>
@@ -29,12 +29,16 @@
                                     </div>
                                     <div class="card__actions">
 
-                                        <form action="/products/<%= product._id %>" method="get"> <button type="submit"
-                                                id="btn">Details</button>
+                                        <form <%if(role=='admin' || role=='Customer' ){%> action="/product/<%=
+                                                product._id %>" <%}else{%>action="/products/<%= product._id %>"<%}%>
+                                                            method="get"> <button type="submit"
+                                                                id="btn">Details</button>
                                         </form>
-                                        <form action="/cart" method="post">
-                                            <button id="btn">Add to Cart</button>
-                                            <input type="hidden" name="productId" value="<%= product._id %>">
+                                        <form <%if(role=='admin' || role=='Customer' ){%> action="/cart" method="post"
+                                            <%}else{%>action="/auth/login" method="get"<%}%>
+                                                    >
+                                                    <button id="btn">Add to Cart</button>
+                                                    <input type="hidden" name="productId" value="<%= product._id %>">
                                         </form>
                                     </div>
                                 </article>

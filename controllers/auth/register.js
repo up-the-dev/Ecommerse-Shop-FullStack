@@ -12,7 +12,7 @@ const register = {
             // return next(error)
             req.flash('error', `${error.message}`)
             return res.redirect('login');
-            
+
         } else {
             let access_token
             let refresh_token
@@ -22,7 +22,7 @@ const register = {
                 if (exist) {
                     req.flash('error', 'user already exist !')
                     return res.redirect('login');
-                    
+
                 }
                 //storing data into db
                 //hashing password
@@ -50,7 +50,7 @@ const register = {
             res.cookie('refresh_token', refresh_token, {
                 httpOnly: true
             })
-           return res.redirect('/')
+            return res.redirect('/home')
         }
 
     }

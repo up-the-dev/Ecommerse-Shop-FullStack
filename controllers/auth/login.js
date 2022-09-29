@@ -8,11 +8,11 @@ const logincontroller = {
     login: async (req, res, next) => {
         //request validation
         req.flash('register', 'false')
-        const { error } = loginSchema.validate(req.body)    
+        const { error } = loginSchema.validate(req.body)
         if (error) {
             req.flash('error', `wrong username or password`)
             return res.redirect('login');
-           
+
         }
         //checking if user exist
         let access_token
@@ -22,15 +22,15 @@ const logincontroller = {
             if (!user) {
                 req.flash('error', 'user not exist . please register first !')
                 return res.redirect('login');
-               
+
             }
             //password varification
             const match = await bcrypt.compare(req.body.password, user.password)
             if (!match) {
-                req.flash('error',  'Wrong Password !')
+                req.flash('error', 'Wrong Password !')
                 return res.redirect('login');
-               
-                
+
+
             }
             access_token = await JwtService.sign({ _id: user._id, role: user.role })
             refresh_token = await JwtService.sign({ _id: user._id, role: user.role }, REFRESH_SECRET, '7d')
@@ -45,7 +45,7 @@ const logincontroller = {
         res.cookie('refresh_token', refresh_token, {
             httpOnly: true
         })
-        return res.redirect('/')
+        return res.redirect('/home')
 
     },
     getLogin: (req, res, next) => {
