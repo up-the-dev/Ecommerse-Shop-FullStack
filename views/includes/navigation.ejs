@@ -2,7 +2,6 @@
 <header class="main-header">
     <button id="side-menu-toggle">Menu</button>
     <nav class="main-header__nav">
-        <%console.log(role)%>
             <%if(role=='Customer' || role=='admin' ){%>
                 <ul class="main-header__item-list">
                     <li class="main-header__item">
@@ -37,7 +36,7 @@
 
     </nav>
     <form style="background-color:transparent;" action="/auth/login" method="get">
-        <button id="btn" onclick="logOut()" style="background-color: orangered; color: white;">logOut</button>
+        <button id="logout" onclick="logOut()">logOut</button>
     </form>
     <%}else{%>
         <ul class="main-header__item-list">
